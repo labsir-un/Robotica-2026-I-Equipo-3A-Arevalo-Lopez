@@ -57,11 +57,11 @@ Aquí se documentan los laboratorios, avances, resultados y la presentación de 
   <img src="./assets/integrantes/integrante1.jpg" alt="Foto integrante 1" style="border-radius: 50%; width: 180px;"><br>
 </div>
 
-- **Nombre completo:** Nombre Apellido
+- **Nombre completo:** Edward Jeisen Jair Arévalo Peña
 - **Carrera:** Ingeniería Mecatrónica
-- **Correo institucional:** nombre@unal.edu.co
-- **Usuario de GitHub:** [usuariogithub](https://github.com/usuariogithub)
-- **Rol en el equipo:** Ej. Integración ROS 2, documentación, simulación
+- **Correo institucional:** edarevalop@unal.edu.co
+- **Usuario de GitHub:** [edarevalop](https://github.com/edarevalop)
+- **Rol en el equipo:** documentación, simulación
 - **Intereses:** Robótica móvil, visión artificial, automatización
 - **Descripción breve:**  
   Escribe aquí una breve presentación personal y académica del integrante.
@@ -73,28 +73,12 @@ Aquí se documentan los laboratorios, avances, resultados y la presentación de 
   <img src="./assets/integrantes/integrante2.jpg" alt="Foto integrante 2" style="border-radius: 50%; width: 180px;"><br>
 </div>
 
-- **Nombre completo:** Nombre Apellido
+- **Nombre completo:** Juan Diego López Mayorga
 - **Carrera:** Ingeniería Mecatrónica
-- **Correo institucional:** nombre@unal.edu.co
-- **Usuario de GitHub:** [usuariogithub](https://github.com/usuariogithub)
-- **Rol en el equipo:** Ej. Modelado, programación, control
+- **Correo institucional:** jlopezmay@unal.edu.co
+- **Usuario de GitHub:** [JuanLopezMay](https://github.com/usuariogithub)
+- **Rol en el equipo:** Modelado, programación, control
 - **Intereses:** Manipulación, ROS 2, control de robots
-- **Descripción breve:**  
-  Escribe aquí una breve presentación personal y académica del integrante.
-
----
-
-### Integrante 3
-<div align="center">
-  <img src="./assets/integrantes/integrante3.jpg" alt="Foto integrante 3" style="border-radius: 50%; width: 180px;"><br>
-</div>
-
-- **Nombre completo:** Nombre Apellido
-- **Carrera:** Ingeniería Mecatrónica
-- **Correo institucional:** nombre@unal.edu.co
-- **Usuario de GitHub:** [usuariogithub](https://github.com/usuariogithub)
-- **Rol en el equipo:** Ej. Documentación, pruebas, simulación
-- **Intereses:** Robótica industrial, sistemas autónomos, IA
 - **Descripción breve:**  
   Escribe aquí una breve presentación personal y académica del integrante.
 
