@@ -17,7 +17,6 @@ Facultad de Ingeniería – Sede Bogotá
 La robótica industrial se ha consolidado como una de las tecnologías más importantes dentro de los procesos de automatización moderna, permitiendo incrementar la productividad, la precisión y la seguridad en diferentes sectores industriales. Los manipuladores robóticos son capaces de ejecutar tareas repetitivas y complejas mediante movimientos controlados y programados, lo que los convierte en herramientas fundamentales para aplicaciones de ensamblaje, manipulación de materiales, inspección y manufactura. Debido a la gran variedad de configuraciones y prestaciones existentes, resulta necesario comprender las características técnicas y operativas de cada tipo de robot para seleccionar la alternativa más adecuada según los requerimientos de una aplicación específica.
 
 En el presente laboratorio se estudió el manipulador industrial EPSON T3-401S, abordando sus configuraciones iniciales, modos de operación manual y herramientas de programación mediante el software EPSON RC+ 7.0. Asimismo, se realizó una comparación de sus características con otros manipuladores industriales, se analizaron las trayectorias disponibles para su movimiento y se desarrolló una aplicación de manipulación. Debido a inconvenientes técnicos, no fue posible llevar a cabo la implementación física de la trayectoria programada. Por esto, el desarrollo del laboratorio se enfocó en la simulación y validación virtual de las rutinas propuestas.
-
 ---
 
 ## Especificaciones técnicas
@@ -55,7 +54,6 @@ Para "Junior", que es el robot utilizado en el laboratorio, la configuración mo
 Desde el punto de vista geométrico, la posición HOME del EPSON T3-401S ubica los dos eslabones principales del brazo SCARA alineados entre sí, formando una configuración recta respecto al eje de la base. Asimismo, el eje vertical (J3) se posiciona en su punto superior de recorrido, manteniendo la herramienta alejada de la superficie de trabajo. Esta configuración proporciona una posición fácilmente identificable, minimiza el riesgo de interferencias con objetos del entorno y constituye el punto de partida para la ejecución de trayectorias y tareas programadas.
 
 ***IMAGEN 2
-
 ---
 
 ## Movimiento en EPSON RC+ 7.0
@@ -73,7 +71,6 @@ En el modo Articulación, la orientación de los eslabones se puede modificar me
 **IMAGEN 4
 
 Finalmente, el software muestra en tiempo real la posición actual del robot, indicando las coordenadas X, Y y Z en milímetros, así como los ángulos de orientación correspondientes. Esta información permite verificar los movimientos ejecutados y facilita la enseñanza de puntos para la posterior programación de trayectorias.
-
 ---
 
 ##Velocidad en EPSON RC+ 7.0
@@ -91,7 +88,6 @@ Por dificultades de disponibilidad, el robot dispuesto en el laboratorio no cont
 Para ejecutar movimientos, EPSON RC+ 7.0 interpreta el programa desarrollado por el usuario y lo convierte en comandos que son enviados al controlador. Este calcula las trayectorias necesarias y coordina el movimiento de cada articulación para alcanzar las posiciones objetivo respetando los parámetros de posición deseada, velocidad y otros parámetros. De esta forma, el sistema garantiza que los desplazamientos se realicen de manera precisa, controlada y segura dentro del espacio de trabajo del robot.
 
 Para la aplicación de manipulación y ubicación de huevos en la cubeta, resultó especialmente útil la función Jump Pallet incorporada en EPSON RC+ 7.0. Esta instrucción automatiza el desplazamiento seguro entre posiciones. Su funcionamiento consiste en elevar inicialmente el eje vertical J3 hasta una altura segura, realizar posteriormente el desplazamiento horizontal en el plano XY mediante los ejes J1 y J2, y finalmente descender nuevamente el eje J3 hasta la posición objetivo para efectuar la toma o liberación del huevo.
-
 ---
 
 ##Análisis comparativo
@@ -106,7 +102,6 @@ Para la aplicación de manipulación y ubicación de huevos en la cubeta, result
 | **Ventajas**                 | Alta fidelidad en la simulación y comunicación directa con controladores ABB.                     | Flexibilidad, facilidad de uso y compatibilidad con diferentes fabricantes.                            | Comunicación directa con el controlador y control del robot físico desde el computador.                                     |
 | **Limitaciones**             | Compatibilidad limitada principalmente a robots ABB y mayor complejidad de aprendizaje.           | Menor nivel de emulación detallada del controlador frente a herramientas especializadas.               | Compatibilidad limitada a robots Epson y menor flexibilidad para trabajar con robots de otros fabricantes.                  |
 |                              |                                                                                                   |                                                                                                        |                                                                                                                             |
-
 
 A partir de la experiencia desarrollada en el laboratorio, se identificó que RobotStudio es la herramienta más adecuada cuando se trabaja exclusivamente con robots ABB. Su principal ventaja es la alta fidelidad de simulación, ya que utiliza tecnologías derivadas del controlador real, permitiendo validar programas y trayectorias con gran precisión antes de implementarlas físicamente. Sin embargo, esta especialización constituye también su principal limitación, puesto que su uso se restringe prácticamente a robots ABB y requiere un mayor tiempo de aprendizaje. Sus aplicaciones más comunes se encuentran en el diseño, simulación y programación de robots ABB.
 
