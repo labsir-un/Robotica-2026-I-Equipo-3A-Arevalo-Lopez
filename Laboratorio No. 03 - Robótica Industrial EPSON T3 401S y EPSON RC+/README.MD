@@ -56,6 +56,8 @@ Desde el punto de vista geométrico, la posición HOME del EPSON T3-401S ubica l
 
 ***IMAGEN 2
 
+---
+
 ## Movimiento en EPSON RC+ 7.0
 
 Para realizar movimientos manuales del manipulador EPSON T3-401S mediante el software EPSON RC+, primero es necesario acceder al menú \textbf{Herramientas} ubicado en la barra superior del programa. Posteriormente, se selecciona la opción Administrador del robot y, dentro de esta ventana, se ingresa al apartado Mover y enseñar, el cual proporciona las herramientas necesarias para controlar manualmente la posición y orientación del robot.
@@ -72,6 +74,8 @@ En el modo Articulación, la orientación de los eslabones se puede modificar me
 
 Finalmente, el software muestra en tiempo real la posición actual del robot, indicando las coordenadas X, Y y Z en milímetros, así como los ángulos de orientación correspondientes. Esta información permite verificar los movimientos ejecutados y facilita la enseñanza de puntos para la posterior programación de trayectorias.
 
+---
+
 ##Velocidad en EPSON RC+ 7.0
 
 Los movimientos manuales del EPSON T3-401S pueden ejecutarse a diferentes velocidades, las cuales se seleccionan mediante la lista desplegable Velocidad disponible en la ventana Mover y enseñar. El software solo permite velocidad Baja o Alta, lo que nos permite elegir entre movimientos más precisos o desplazamientos más rápidos según la tarea a realizar.
@@ -87,6 +91,8 @@ Por dificultades de disponibilidad, el robot dispuesto en el laboratorio no cont
 Para ejecutar movimientos, EPSON RC+ 7.0 interpreta el programa desarrollado por el usuario y lo convierte en comandos que son enviados al controlador. Este calcula las trayectorias necesarias y coordina el movimiento de cada articulación para alcanzar las posiciones objetivo respetando los parámetros de posición deseada, velocidad y otros parámetros. De esta forma, el sistema garantiza que los desplazamientos se realicen de manera precisa, controlada y segura dentro del espacio de trabajo del robot.
 
 Para la aplicación de manipulación y ubicación de huevos en la cubeta, resultó especialmente útil la función Jump Pallet incorporada en EPSON RC+ 7.0. Esta instrucción automatiza el desplazamiento seguro entre posiciones. Su funcionamiento consiste en elevar inicialmente el eje vertical J3 hasta una altura segura, realizar posteriormente el desplazamiento horizontal en el plano XY mediante los ejes J1 y J2, y finalmente descender nuevamente el eje J3 hasta la posición objetivo para efectuar la toma o liberación del huevo.
+
+---
 
 ##Análisis comparativo
 
