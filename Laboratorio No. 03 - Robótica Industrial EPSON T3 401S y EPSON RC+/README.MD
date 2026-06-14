@@ -116,27 +116,26 @@ Finalmente, EPSON RC+ 7.0 sobresale por su integración directa con los robots E
 ```mermaid
 flowchart TD
     A[Inicio] --> B[Inicializar vector Ruta]
-    B --> C[Encender motores]
-    C --> D[Configurar potencia, aceleración y velocidad]
-    D --> E[Ir a Home]
+    B --> C[Configurar robot]
+    C --> D[Ir a Home]
 
-    E --> F[Crear pallet 5x6]
-    F --> G[i = 1]
+    D --> E[Crear pallet 5x6]
+    E --> F[Indice i = 1]
 
-    G --> H[Tomar Huevo A en Ruta(i)]
-    H --> I[Activar succión]
-    I --> J[Mover a Ruta(i+1) con Jump Pallet]
-    J --> K[Desactivar succión]
+    F --> G[Tomar Huevo A]
+    G --> H[Activar succion]
+    H --> I[Mover Huevo A al siguiente punto]
+    I --> J[Desactivar succion]
 
-    K --> L[Tomar Huevo B en 31 - Ruta(i)]
-    L --> M[Activar succión]
-    M --> N[Mover a 31 - Ruta(i+1) con Jump Pallet]
-    N --> O[Desactivar succión]
+    J --> K[Tomar Huevo B]
+    K --> L[Activar succion]
+    L --> M[Mover Huevo B al siguiente punto]
+    M --> N[Desactivar succion]
 
-    O --> P[i = i + 1]
-    P --> Q{¿i < 39?}
+    N --> O[Incrementar i]
+    O --> P{Quedan movimientos}
 
-    Q -- Sí --> H
-    Q -- No --> R[Regresar a Home]
-    R --> S[Fin]
+    P -- Si --> G
+    P -- No --> Q[Ir a Home]
+    Q --> R[Fin]
 ```
