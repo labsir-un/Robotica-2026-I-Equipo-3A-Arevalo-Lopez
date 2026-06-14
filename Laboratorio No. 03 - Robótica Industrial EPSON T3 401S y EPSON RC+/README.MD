@@ -110,3 +110,33 @@ Por otra parte, RoboDK destacó por su facilidad de uso y su compatibilidad con 
 
 Finalmente, EPSON RC+ 7.0 sobresale por su integración directa con los robots Epson, ya que permite programar, simular, configurar y controlar el manipulador desde una única interfaz. Durante la práctica, el software actuó como un teach pendant virtual, facilitando el movimiento manual, la enseñanza de puntos y la ejecución de trayectorias en el EPSON T3-401S. No obstante, su principal limitación es que está diseñado específicamente para robots Epson, lo que reduce su aplicabilidad en entornos con robots de diferentes fabricantes. Sus aplicaciones se centran en la programación, supervisión y operación de sistemas robóticos Epson tanto en entornos educativos como industriales. Adicionalmente, al igual que con RoboDK, no se cuenta con un software tan pulido, especialmente hablando de las diferentes pantallas o pestañas que se superponen una a la otra.
 
+---
+## Diagrama de flujo
+
+```mermaid
+flowchart TD
+    A[Inicio] --> B[Inicializar vector Ruta]
+    B --> C[Encender motores]
+    C --> D[Configurar potencia, aceleración y velocidad]
+    D --> E[Ir a Home]
+
+    E --> F[Crear pallet 5x6]
+    F --> G[i = 1]
+
+    G --> H[Tomar Huevo A en Ruta(i)]
+    H --> I[Activar succión]
+    I --> J[Mover a Ruta(i+1) con Jump Pallet]
+    J --> K[Desactivar succión]
+
+    K --> L[Tomar Huevo B en 31 - Ruta(i)]
+    L --> M[Activar succión]
+    M --> N[Mover a 31 - Ruta(i+1) con Jump Pallet]
+    N --> O[Desactivar succión]
+
+    O --> P[i = i + 1]
+    P --> Q{¿i < 39?}
+
+    Q -- Sí --> H
+    Q -- No --> R[Regresar a Home]
+    R --> S[Fin]
+```
