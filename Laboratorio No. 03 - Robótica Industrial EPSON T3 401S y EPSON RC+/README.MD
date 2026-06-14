@@ -122,12 +122,12 @@ flowchart TD
     D --> E[Crear pallet 5x6]
     E --> F[Indice i = 1]
 
-    F --> G[Tomar Huevo A]
+    F --> G[Ir a posición de Huevo A]
     G --> H[Activar succion]
     H --> I[Mover Huevo A al siguiente punto]
     I --> J[Desactivar succion]
 
-    J --> K[Tomar Huevo B]
+    J --> K[Ir a posición de Huevo B]
     K --> L[Activar succion]
     L --> M[Mover Huevo B al siguiente punto]
     M --> N[Desactivar succion]
