@@ -73,14 +73,14 @@ En el modo Articulación, la orientación de los eslabones se puede modificar me
 Finalmente, el software muestra en tiempo real la posición actual del robot, indicando las coordenadas X, Y y Z en milímetros, así como los ángulos de orientación correspondientes. Esta información permite verificar los movimientos ejecutados y facilita la enseñanza de puntos para la posterior programación de trayectorias.
 
 ---
-##Velocidad en EPSON RC+ 7.0
+## Velocidad en EPSON RC+ 7.0
 
 Los movimientos manuales del EPSON T3-401S pueden ejecutarse a diferentes velocidades, las cuales se seleccionan mediante la lista desplegable Velocidad disponible en la ventana Mover y enseñar. El software solo permite velocidad Baja o Alta, lo que nos permite elegir entre movimientos más precisos o desplazamientos más rápidos según la tarea a realizar.
 
 La velocidad seleccionada afecta directamente la rapidez con la que se ejecutan los movimientos manuales, independientemente de si el robot se encuentra en modo \textbf{Mundo} (cartesiano) o \textbf{Articulación}. El nivel establecido puede identificarse fácilmente observando la opción activa en la lista desplegable de velocidad, al lado de la lista desplegable Modo.
 
 ---
-##Funcionalidades en EPSON RC+ 7.0
+## Funcionalidades en EPSON RC+ 7.0
 
 EPSON RC+ 7.0 es el entorno de programación y simulación desarrollado por Epson para la configuración y operación de este modelo de robot SCARA. Entre sus principales funcionalidades se encuentran la creación y edición de rutinas, la enseñanza de puntos, la definición de herramientas y sistemas de coordenadas, la configuración de entradas y salidas digitales, importación de piezas y la simulación de trayectorias antes de su ejecución en el manipulador físico.
 
@@ -91,7 +91,7 @@ Para ejecutar movimientos, EPSON RC+ 7.0 interpreta el programa desarrollado por
 Para la aplicación de manipulación y ubicación de huevos en la cubeta, resultó especialmente útil la función Jump Pallet incorporada en EPSON RC+ 7.0. Esta instrucción automatiza el desplazamiento seguro entre posiciones. Su funcionamiento consiste en elevar inicialmente el eje vertical J3 hasta una altura segura, realizar posteriormente el desplazamiento horizontal en el plano XY mediante los ejes J1 y J2, y finalmente descender nuevamente el eje J3 hasta la posición objetivo para efectuar la toma o liberación del huevo.
 
 ---
-##Análisis comparativo
+## Análisis comparativo
 
 | Característica               | RobotStudio                                                                                       | RoboDK                                                                                                 | EPSON RC+ 7.0                                                                                                               |
 | ---------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------- |
