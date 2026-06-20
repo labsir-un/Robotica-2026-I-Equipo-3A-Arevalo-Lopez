@@ -139,6 +139,14 @@ flowchart TD
     P -- No --> Q[Ir a Home]
     Q --> R[Fin]
 ```
+
+
+# Código de la rutina (SPEL+)
+
+El algoritmo de control y la gestión de trayectorias detallados en el diagrama anterior se programaron utilizando el lenguaje nativo SPEL+. El script completo con la definición de los vectores de posición, la configuración del pallet y las instrucciones de activación de las salidas digitales se encuentra adjunto en el siguiente enlace al repositorio del proyecto:
+
+[Código Fuente de la Simulación en EPSON RC+ 7.0](Main.prg)
+
 ## Video de simulación
 En la simulación desarrollada en EPSON RC+ 7.0, el manipulador SCARA EPSON T3-401S inicia su rutina ubicándose en la posición de Home para garantizar un punto de partida seguro. Posteriormente, el sistema configura el espacio de trabajo definiendo un pallet de 5x6, el cual representa lógicamente las posiciones de la cubeta de huevos. Una vez establecidas estas coordenadas, el programa inicializa los parámetros y carga el vector con la ruta planificada para comenzar la tarea de manipulación
 
