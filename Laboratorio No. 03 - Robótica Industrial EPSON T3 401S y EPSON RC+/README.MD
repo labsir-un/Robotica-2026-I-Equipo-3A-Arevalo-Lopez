@@ -140,4 +140,9 @@ flowchart TD
     Q --> R[Fin]
 ```
 ## Video de simulación
+En la simulación desarrollada en EPSON RC+ 7.0, el manipulador SCARA EPSON T3-401S inicia su rutina ubicándose en la posición de Home para garantizar un punto de partida seguro. Posteriormente, el sistema configura el espacio de trabajo definiendo un pallet de 5x6, el cual representa lógicamente las posiciones de la cubeta de huevos. Una vez establecidas estas coordenadas, el programa inicializa los parámetros y carga el vector con la ruta planificada para comenzar la tarea de manipulación
+
+Con la configuración lista, el robot entra en un ciclo iterativo de movimiento. Primero se desplaza hacia la coordenada actual del Huevo A; al llegar, el eje vertical (J3) desciende y el controlador activa una salida digital(DO_09) para encender la succión de la ventosa. Con el huevo asegurado, el efector final se eleva y realiza el desplazamiento siguiendo el patrón en "L", característico del caballo de ajedrez, hasta su nueva posición. Allí, el brazo desciende nuevamente y desactiva la señal digital para depositar el huevo de forma suave, repitiendo inmediatamente esta misma secuencia de traslado y control de vacío para el Huevo B.
+
+Para recorrer todas las posiciones de la cubeta respetando este patrón geométrico, el algoritmo determina que cada huevo debe realizar un total de 40 desplazamientos. De esta manera, el manipulador ejecuta una secuencia de 80 movimientos en total a lo largo de la rutina, alternando progresivamente la reubicación de ambos objetos. Al agotar todas las posiciones calculadas en el arreglo, el ciclo concluye y el robot retorna automáticamente a su configuración de Home, finalizando la operación.
 El presente video se encuentra en una carpeta de drive, a la cual puede axeder desde el siguiente link: https://drive.google.com/drive/folders/1NCYdA7Q2NMnhNT7tDRmUmT1EeTVU2Zho?usp=drive_link 
