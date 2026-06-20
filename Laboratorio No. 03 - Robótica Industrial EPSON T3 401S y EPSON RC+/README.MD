@@ -146,3 +146,11 @@ Con la configuración lista, el robot entra en un ciclo iterativo de movimiento.
 
 Para recorrer todas las posiciones de la cubeta respetando este patrón geométrico, el algoritmo determina que cada huevo debe realizar un total de 40 desplazamientos. De esta manera, el manipulador ejecuta una secuencia de 80 movimientos en total a lo largo de la rutina, alternando progresivamente la reubicación de ambos objetos. Al agotar todas las posiciones calculadas en el arreglo, el ciclo concluye y el robot retorna automáticamente a su configuración de Home, finalizando la operación.
 El presente video se encuentra en una carpeta de drive, a la cual puede axeder desde el siguiente link: https://drive.google.com/drive/folders/1NCYdA7Q2NMnhNT7tDRmUmT1EeTVU2Zho?usp=drive_link 
+
+## Referencias
+
+- Seiko Epson Corporation. (s.f.). EPSON T3 Robot Manual.
+
+- Seiko Epson Corporation. (s.f.). EPSON Force Guide SPEL+ 7.0 Language Reference Manual (Versión 7.4r10).
+
+- Seiko Epson Corporation. (s.f.). EPSON RC+ 7.0 User's Guide (Versión 7.3r4).  
