@@ -139,3 +139,5 @@ flowchart TD
     P -- No --> Q[Ir a Home]
     Q --> R[Fin]
 ```
+## Video de simulación
+El presente video se encuentra en una carpeta de drive, a la cual puede axeder desde el siguiente link: https://drive.google.com/drive/folders/1NCYdA7Q2NMnhNT7tDRmUmT1EeTVU2Zho?usp=drive_link 
