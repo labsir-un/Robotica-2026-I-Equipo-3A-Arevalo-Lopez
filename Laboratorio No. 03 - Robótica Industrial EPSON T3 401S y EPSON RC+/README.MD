@@ -141,7 +141,7 @@ flowchart TD
 ```
 
 
-# Código de la rutina (SPEL+)
+## Código de la rutina (SPEL+)
 
 El algoritmo de control y la gestión de trayectorias detallados en el diagrama anterior se programaron utilizando el lenguaje nativo SPEL+. El script completo con la definición de los vectores de posición, la configuración del pallet y las instrucciones de activación de las salidas digitales se encuentra adjunto en el siguiente enlace al repositorio del proyecto:
 
