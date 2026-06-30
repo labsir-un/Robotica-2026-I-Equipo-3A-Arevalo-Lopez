@@ -23,7 +23,7 @@ Facultad de Ingeniería – Sede Bogotá
 - [Nodos, tópicos y servicios](#descripción-de-los-nodos-tópicos-y-servicios-utilizados)
 - [Evidencias](#evidencias-de-ejecución-del-programa)
 - [Diagrama de flujo del sistema](#diagrama-de-flujo-del-sistema)
-- [Código fuente](#archivos-del-proyecto)
+- [Anexos](#anexos)
 
 ---
 
@@ -212,7 +212,6 @@ flowchart TD
     AG --> AH[Fin]
 ```
 
-## Archivos del proyecto
 
 # Anexos
 
