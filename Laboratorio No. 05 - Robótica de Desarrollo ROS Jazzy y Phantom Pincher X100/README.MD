@@ -1,4 +1,4 @@
-# Robótica Industrial - Análisis y Operación del Manipulador EPSON T3-401S
+# Robótica Industrial - Laboratorio No. 05 - Phantom X Pincher X100 – ROS 2 Jazzy – RViz
 
 **Universidad Nacional de Colombia**  
 Facultad de Ingeniería – Sede Bogotá
@@ -45,13 +45,13 @@ A partir de esta inspección visual y técnica, se consolidó la siguiente infor
 
 ## Actividad 3. Medición del robot
 
-Para modelar la geometría del manipulador, se procedió a determinar las dimensiones físicas de sus componentes principales. En la **Figura X** se presenta el diagrama esquemático del robot, el cual ilustra las longitudes de los eslabones, las distancias entre los ejes de articulaciones consecutivas y la asignación de los sistemas de coordenadas para cada junta. 
+Para modelar la geometría del manipulador, se procedió a determinar las dimensiones físicas de sus componentes principales. En la Figura X se presenta el diagrama esquemático del robot, el cual ilustra las longitudes de los eslabones, las distancias entre los ejes de articulaciones consecutivas y la asignación de los sistemas de coordenadas para cada junta. 
 
-Cabe resaltar que **este diagrama y los sistemas de referencia aquí definidos se tendrán en cuenta como base fundamental para la actividad de cinemática directa**.
+Cabe resaltar que este diagrama y los sistemas de referencia aquí definidos fueron establecidos mediante el método visto en clase para cinemática directa. Dicho diagrama se tendrá en cuenta para la actividad de cinemática directa.
 
-*** INSERTAR DIAGRAMA
+*** INSERTAR ESQUEMA
 
-A partir de la inspección del manipulador, se consolidaron las siguientes medidas (en mm):
+A partir de la medición del manipulador mediante calibrador, se consolidaron las siguientes medidas (en mm):
 
 | Parámetro | Valor |
 | :--- | :---: |
@@ -64,3 +64,36 @@ A partir de la inspección del manipulador, se consolidaron las siguientes medid
 | **D6** | 40 |
 
 > **Nota sobre D6:** la medida **D6** representa qué tan abierto o cerrado está el *gripper*. Por consiguiente, **no es una constante geométrica** de la estructura del brazo, sino una variable de operación que cambia dependiendo de la posición del motor de la pinza.
+
+## Actividad 4. Movimiento individual de articulaciones
+
+Para esta actividad se desarrolló un nodo en Python bajo el framework de **ROS 2 Jazzy** con el objetivo de controlar de forma independiente y selectiva cada una de las articulaciones del robot Phantom X Pincher X100 (base, hombro, codo, muñeca y pinza). 
+
+El programa permite al usuario interactuar a través de la terminal para seleccionar la articulación que desea mover y definir la posición angular objetivo. Como medida de seguridad, el código valida que el ángulo ingresado se encuentre dentro de los límites seguros determinados previamente en la Actividad 6 antes de enviar el comando a los servomotores Dynamixel AX-12A.
+
+Para comprobar el correcto funcionamiento del control y la respuesta física del manipulador, se realizaron pruebas independientes en cada articulación ejecutando al menos tres (3) posiciones angulares distintas y retornando exitosamente a la posición de referencia (0° / posición de home) tras cada movimiento.
+
+A continuación, se adjunta el código fuente completo implementado en Python para el desarrollo de esta actividad:
+
+```python
+#
+```
+
+### Evidencia en Video
+
+La verificación física de esta actividad, donde se detalla el movimiento secuencial de las articulaciones pasando por las tres posiciones de prueba y su respectivo retorno a la posición segura, se encuentra en el siguiente link:
+
+
+
+
+## Actividad 6. Determinación de límites seguros
+
+Para garantizar la integridad física del manipulador, se determinaron experimentalmente los límites de operación para cada una de las articulaciones. Desde la posició de home, se realizó un barrido para cada articulación, de modo que el manipulador nunca sufriera choques o colisiones tanto con él mismo como con su entorno. A partir de las pruebas manuales y visuales, se establecieron los siguientes límites (todos expresados en grados). Además, se definió un margen de seguridad constante de 3° antes del límite físico real, pues es un margen aceptable que permite trabajar ampliamente con el manipulador.
+
+| Articulación | Límite inferior | Límite superior | Margen de seguridad |
+| :--- | :---: | :---: | :---: |
+| **Base** | -150° | 150° | 3° |
+| **Hombro** | -75° | 125° | 3° |
+| **Codo** | -121° | 135° | 3° |
+| **Muñeca** | -102° | 100° | 3° |
+| **Pinza** | -90° | 90° | 3° |
