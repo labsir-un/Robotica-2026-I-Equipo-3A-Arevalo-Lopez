@@ -187,7 +187,7 @@ flowchart TD
 
     AA --> AB{Distancia mayor a 0.5}
 
-    AB -- Si --> AC[Publicar Twist en turtle2 cmd_vel]
+    AB -- Si ---> AC[Publicar Twist en turtle2 cmd_vel]
     AB -- No --> AD[Publicar velocidad cero]
 
     AC --> W
