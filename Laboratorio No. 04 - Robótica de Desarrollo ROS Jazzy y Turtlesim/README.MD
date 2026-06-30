@@ -13,6 +13,17 @@ Facultad de Ingeniería – Sede Bogotá
 
 28 de Junio del 2026
 
+# Índice
+
+- [Descripción general](#descripción-general-del-laboratorio)
+- [Control manual](#explicación-del-control-manual-de-la-tortuga)
+- [Funciones automáticas](#explicación-de-las-funciones-automáticas-implementadas)
+- [Letras personalizadas](#explicación-del-dibujo-de-letras-personalizadas)
+- [Sistema líder-seguidor](#explicación-del-sistema-líder-seguidor-con-dos-tortugas)
+- [Nodos, tópicos y servicios](#descripción-de-los-nodos-tópicos-y-servicios-utilizados)
+- [Evidencias](#evidencias-de-ejecución-del-programa)
+- [Código fuente](#archivos-del-proyecto)
+
 ---
 
 ## Descripción general del laboratorio
@@ -77,7 +88,7 @@ Finalmente, el mensaje de velocidad es publicado sobre el tópico `/turtle2/cmd_
 
 ## Descripción de los nodos, tópicos y servicios utilizados
 
-La aplicación desarrollada se encuentra compuesta por dos nodos principales implementados por los estudiantes, además del nodo `turtlesim_node` proporcionado por el simulador Turtlesim. La comunicación entre estos nodos se realiza mediante la arquitectura de ROS 2, utilizando tópicos para el intercambio continuo de información y servicios para la ejecución de acciones específicas.
+La aplicación desarrollada se encuentra compuesta por dos nodos principales, además del nodo `turtlesim_node` proporcionado por el simulador Turtlesim. La comunicación entre estos nodos se realiza mediante la arquitectura de ROS 2, utilizando tópicos para el intercambio continuo de información y servicios para la ejecución de acciones específicas.
 
 El nodo **`move_turtle.py`** constituye el controlador principal del sistema. Su responsabilidad es gestionar el control manual de `turtle1`, ejecutar las trayectorias automáticas, dibujar las figuras y las letras programadas, activar o desactivar el lápiz de dibujo y reiniciar la posición de la tortuga. Para ello, publica mensajes de velocidad en el tópico **`/turtle1/cmd_vel`**, se suscribe al tópico **`/turtle1/pose`** para conocer la posición actual de la tortuga y utiliza los servicios **`/turtle1/set_pen`** y **`/turtle1/teleport_absolute`** para controlar el lápiz y reposicionar la tortuga, respectivamente.
 
@@ -100,4 +111,12 @@ De igual forma, los servicios empleados durante la implementación fueron:
 
 La utilización conjunta de estos nodos, tópicos y servicios permitió construir una aplicación distribuida en la que cada nodo cumple una función específica y se comunica con los demás mediante los mecanismos propios de ROS 2. 
 
+## Evidencias de ejecución del programa
 
+
+## Archivos del proyecto
+
+En esta sección se presentan los archivos principales desarrollados para la implementación del laboratorio. Cada uno de ellos corresponde a un nodo propio de ROS 2 encargado de una funcionalidad específica dentro del sistema. El archivo `move_turtle.py` implementa el control manual de la tortuga, las trayectorias automáticas y las diferentes acciones solicitadas en el laboratorio, mientras que `turtle_follower.py` desarrolla el comportamiento líder-seguidor mediante el seguimiento automático de la tortuga principal. Los enlaces presentados a continuación permiten acceder directamente al código fuente de cada implementación alojada en este repositorio.
+
+- [move_turtle.py](move_turtle.py)
+- [turtle_follower.py](turtle_follower.py)
