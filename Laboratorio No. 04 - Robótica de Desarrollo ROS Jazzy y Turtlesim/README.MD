@@ -98,6 +98,6 @@ De igual forma, los servicios empleados durante la implementación fueron:
 * **`/turtle1/set_pen`**: permite habilitar o deshabilitar el lápiz de dibujo, además de configurar sus características.
 * **`/turtle1/teleport_absolute`**: reposiciona instantáneamente la tortuga principal en unas coordenadas y orientación determinadas.
 
-La utilización conjunta de estos nodos, tópicos y servicios permitió construir una aplicación distribuida en la que cada nodo cumple una función específica y se comunica con los demás mediante los mecanismos propios de ROS 2.
+La utilización conjunta de estos nodos, tópicos y servicios permitió construir una aplicación distribuida en la que cada nodo cumple una función específica y se comunica con los demás mediante los mecanismos propios de ROS 2. 
 
 
