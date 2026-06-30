@@ -22,6 +22,7 @@ Facultad de Ingeniería – Sede Bogotá
 - [Sistema líder-seguidor](#explicación-del-sistema-líder-seguidor-con-dos-tortugas)
 - [Nodos, tópicos y servicios](#descripción-de-los-nodos-tópicos-y-servicios-utilizados)
 - [Evidencias](#evidencias-de-ejecución-del-programa)
+- [Diagrama de flujo del sistema](#diagrama-de-flujo-del-sistema)
 - [Código fuente](#archivos-del-proyecto)
 
 ---
@@ -115,7 +116,7 @@ La utilización conjunta de estos nodos, tópicos y servicios permitió construi
 
 
 
-## Diagrama de flujo:
+## Diagrama de flujo del sistema
 
 ```mermaid
 flowchart TD
@@ -213,7 +214,13 @@ flowchart TD
 
 ## Archivos del proyecto
 
-En esta sección se presentan los archivos principales desarrollados para la implementación del laboratorio. Cada uno de ellos corresponde a un nodo propio de ROS 2 encargado de una funcionalidad específica dentro del sistema. El archivo `move_turtle.py` implementa el control manual de la tortuga, las trayectorias automáticas y las diferentes acciones solicitadas en el laboratorio, mientras que `turtle_follower.py` desarrolla el comportamiento líder-seguidor mediante el seguimiento automático de la tortuga principal. Los enlaces presentados a continuación permiten acceder directamente al código fuente de cada implementación alojada en este repositorio.
+# Anexos
 
-- [move_turtle.py](move_turtle.py)
-- [turtle_follower.py](turtle_follower.py)
+Con el fin de facilitar la revisión del laboratorio, se incluyen los archivos fuente desarrollados durante la implementación de la solución. Ambos nodos fueron programados en Python utilizando la biblioteca **rclpy**, siguiendo una estructura modular y documentada mediante comentarios que describen las funciones principales del sistema.
+
+## Archivos
+
+| Archivo | Descripción |
+|----------|-------------|
+| [src/move_turtle.py](src/move_turtle.py) | Nodo principal encargado del control manual, trayectorias automáticas, dibujo de figuras y letras, así como del uso de los servicios de Turtlesim. |
+| [src/turtle_follower.py](src/turtle_follower.py) | Nodo que implementa el sistema líder-seguidor, creando una segunda tortuga y controlando su movimiento mediante la información recibida de los tópicos de posición. |
