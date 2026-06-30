@@ -115,59 +115,100 @@ La utilización conjunta de estos nodos, tópicos y servicios permitió construi
 
 
 
-
-
-
-
-
 ## Diagrama de flujo:
+
 ```mermaid
 flowchart TD
 
     A[Inicio] --> B[Inicializar ROS 2]
-    B --> C[Crear nodo move_turtle]
-    C --> D[Crear nodo turtle_follower]
-    D --> E[Crear turtle2 mediante servicio Spawn]
-    E --> F[Entrar al ciclo principal]
 
-    F --> G[Leer teclado]
+    B --> C{Iniciar nodos}
 
-    G --> H{¿Qué acción ejecutar?}
+    %% ==========================
+    %% Nodo move_turtle
+    %% ==========================
 
-    H -- Flechas --> I[Calcular velocidad manual]
-    I --> J[Publicar velocidad a turtle1]
-    J --> K[Leer posicion de turtle1]
+    C --> D[Crear nodo move_turtle]
 
-    H -- S --> L[Dibujar cuadrado]
-    L --> J
+    D --> E[Leer teclado]
 
-    H -- T --> M[Dibujar triangulo]
-    M --> J
+    E --> F{Accion solicitada}
 
-    H -- E A J L --> N[Dibujar letra seleccionada]
-    N --> J
+    F -- Flechas --> G[Control manual]
+    G --> H[Publicar Twist en turtle1 cmd_vel]
 
-    H -- R --> O[Reiniciar posicion]
-    O --> F
+    F -- S --> I[Dibujar cuadrado]
+    I --> H
 
-    H -- P --> P[Activar o desactivar lapiz]
-    P --> F
+    F -- T --> J[Dibujar triangulo]
+    J --> H
 
-    H -- A --> Q[Ejecutar trayectoria automatica]
-    Q --> K
+    F -- E A J L --> K[Dibujar letra]
+    K --> H
 
-    H -- Q --> R[Detener movimiento]
-    R --> F
+    F -- R --> L[Reiniciar posicion]
+    L --> E
 
-    K --> S[Leer posicion de turtle2]
-    S --> T[Calcular distancia y orientacion]
-    T --> U[Calcular velocidades de seguimiento]
-    U --> V[Publicar velocidad a turtle2]
-    V --> W{¿Continuar ejecucion?}
+    F -- P --> M[Activar o desactivar lapiz]
+    M --> E
 
-    W -- Si --> F
-    W -- No --> X[Cerrar nodos]
-    X --> Y[Final]
+    F -- A --> N[Ejecutar trayectoria automatica]
+    N --> O[Leer turtle1 pose]
+    O --> P{Cerca del borde}
+
+    P -- Si --> Q[Girar]
+    P -- No --> R[Avanzar]
+
+    Q --> H
+    R --> H
+
+    F -- Q --> S[Detener movimiento]
+    S --> E
+
+    H --> E
+
+    %% ==========================
+    %% Nodo turtle_follower
+    %% ==========================
+
+    C --> T[Crear nodo turtle_follower]
+
+    T --> U[Esperar servicio Spawn]
+    U --> V[Crear turtle2]
+
+    V --> W[Leer turtle1 pose]
+    W --> X[Leer turtle2 pose]
+
+    X --> Y[Calcular distancia]
+
+    Y --> Z[Calcular orientacion]
+
+    Z --> AA[Calcular velocidades]
+
+    AA --> AB{Distancia mayor a 0.5}
+
+    AB -- Si --> AC[Publicar Twist en turtle2 cmd_vel]
+    AB -- No --> AD[Publicar velocidad cero]
+
+    AC --> W
+    AD --> W
+
+    %% ==========================
+    %% Finalizacion
+    %% ==========================
+
+    E --> AE{Cerrar programa}
+
+    W --> AE
+
+    AE -- No --> E
+    AE -- No --> W
+
+    AE -- Si --> AF[Destruir nodos]
+
+    AF --> AG[Cerrar ROS 2]
+
+    AG --> AH[Fin]
 ```
 
 ## Archivos del proyecto
