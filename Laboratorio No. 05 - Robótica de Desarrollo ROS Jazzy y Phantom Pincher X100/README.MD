@@ -45,12 +45,11 @@ A partir de esta inspección visual y técnica, se consolidó la siguiente infor
 
 ## Actividad 3. Medición del robot
 
-[cite_start]Para modelar la geometría del manipulador, se procedió a determinar las dimensiones físicas de sus componentes principales[cite: 242]. [cite_start]En la **Figura 3** se presenta el diagrama esquemático del robot, el cual ilustra las longitudes de los eslabones, las distancias entre los ejes de articulaciones consecutivas y la asignación de los sistemas de coordenadas para cada junta[cite: 247, 248, 251]. 
+Para modelar la geometría del manipulador, se procedió a determinar las dimensiones físicas de sus componentes principales. En la **Figura X** se presenta el diagrama esquemático del robot, el cual ilustra las longitudes de los eslabones, las distancias entre los ejes de articulaciones consecutivas y la asignación de los sistemas de coordenadas para cada junta. 
 
 Cabe resaltar que **este diagrama y los sistemas de referencia aquí definidos se tendrán en cuenta como base fundamental para la actividad de cinemática directa**.
 
-![Diagrama cinemático y medidas](ruta/a/tu/image_8cbbde.png)
-[cite_start]*Figura 3: Diagrama geométrico del robot con sistemas coordenados y parámetros de longitud[cite: 251].*
+*** INSERTAR DIAGRAMA
 
 A partir de la inspección del manipulador, se consolidaron las siguientes medidas (en mm):
 
@@ -64,4 +63,4 @@ A partir de la inspección del manipulador, se consolidaron las siguientes medid
 | **L7** | 36 |
 | **D6** | 40 |
 
-> **Nota sobre la medida D6:** A diferencia de las longitudes de los eslabones ($L_1$ a $L_7$), la medida **D6** representa qué tan abierto o cerrado está el *gripper*. Por consiguiente, **no es una constante geométrica** de la estructura del brazo, sino una variable de operación que cambia dependiendo de la posición del motor de la pinza.
+> **Nota sobre D6:** la medida **D6** representa qué tan abierto o cerrado está el *gripper*. Por consiguiente, **no es una constante geométrica** de la estructura del brazo, sino una variable de operación que cambia dependiendo de la posición del motor de la pinza.
