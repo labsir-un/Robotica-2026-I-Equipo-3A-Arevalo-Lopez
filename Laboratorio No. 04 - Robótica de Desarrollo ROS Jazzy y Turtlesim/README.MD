@@ -114,6 +114,62 @@ La utilización conjunta de estos nodos, tópicos y servicios permitió construi
 ## Evidencias de ejecución del programa
 
 
+
+
+
+
+
+
+## Diagrama de flujo:
+```mermaid
+flowchart TD
+
+    A[Inicio] --> B[Inicializar ROS 2]
+    B --> C[Crear nodo move_turtle]
+    C --> D[Crear nodo turtle_follower]
+    D --> E[Crear turtle2 mediante servicio Spawn]
+    E --> F[Entrar al ciclo principal]
+
+    F --> G[Leer teclado]
+
+    G --> H{¿Qué acción ejecutar?}
+
+    H -- Flechas --> I[Calcular velocidad manual]
+    I --> J[Publicar velocidad a turtle1]
+    J --> K[Leer posicion de turtle1]
+
+    H -- S --> L[Dibujar cuadrado]
+    L --> J
+
+    H -- T --> M[Dibujar triangulo]
+    M --> J
+
+    H -- E A J L --> N[Dibujar letra seleccionada]
+    N --> J
+
+    H -- R --> O[Reiniciar posicion]
+    O --> F
+
+    H -- P --> P[Activar o desactivar lapiz]
+    P --> F
+
+    H -- A --> Q[Ejecutar trayectoria automatica]
+    Q --> K
+
+    H -- Q --> R[Detener movimiento]
+    R --> F
+
+    K --> S[Leer posicion de turtle2]
+    S --> T[Calcular distancia y orientacion]
+    T --> U[Calcular velocidades de seguimiento]
+    U --> V[Publicar velocidad a turtle2]
+    V --> W{¿Continuar ejecucion?}
+
+    W -- Si --> F
+    W -- No --> X[Cerrar nodos]
+    X --> Y[Final]
+```
+
 ## Archivos del proyecto
 
 En esta sección se presentan los archivos principales desarrollados para la implementación del laboratorio. Cada uno de ellos corresponde a un nodo propio de ROS 2 encargado de una funcionalidad específica dentro del sistema. El archivo `move_turtle.py` implementa el control manual de la tortuga, las trayectorias automáticas y las diferentes acciones solicitadas en el laboratorio, mientras que `turtle_follower.py` desarrolla el comportamiento líder-seguidor mediante el seguimiento automático de la tortuga principal. Los enlaces presentados a continuación permiten acceder directamente al código fuente de cada implementación alojada en este repositorio.
