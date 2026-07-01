@@ -97,3 +97,54 @@ Para garantizar la integridad física del manipulador, se determinaron experimen
 | **Codo** | -121° | 135° | 3° |
 | **Muñeca** | -102° | 100° | 3° |
 | **Pinza** | -90° | 90° | 3° |
+
+## Actividad 7. Movimiento simultáneo
+
+Para esta etapa del laboratorio, se programó un nodo en ROS 2 Jazzy capaz de enviar comandos de posición a todos los servomotores al mismo tiempo, logrando un desplazamiento coordinado del brazo. Durante las pruebas experimentales, se enviaron las cinco configuraciones articulares solicitadas con una espera constante.
+
+Video de la actividad: https://drive.google.com/file/d/1rA8Yq21tCDFGd_gvHkw8H_XcaD_mzQWH/view?usp=drive_link.
+
+```python
+#
+```
+
+
+
+## Actividad 8. Movimiento secuencial
+
+A diferencia de la actividad anterior, se desarrolló un script para alcanzar las configuraciones objetivo moviendo las articulaciones de manera estrictamente ordenada y enviando las nuevas configuraciones cuando se haya alcanzado el objetivo inmediatamente anterior. La configuración que se ejecutó en esta actividad fue [25, 25, 20, −20, 0].
+
+Video de la actividad: https://drive.google.com/file/d/1VxGd0qiSDAjpTuCy9eNmYjI9JmpYDU3C/view?usp=sharing
+
+```python
+#
+```
+
+Comparativamente, podemos mencionar que:
+
+- Tiempo de ejecución: El movimiento simultáneo es significativamente más eficiente y rápido, ya que todos los actuadores operan en paralelo. Por su parte, el movimiento secuencial es más lento porque acumula los tiempos de desplazamiento de cada motor de forma individual. Sin embargo, este último cuenta con un movimiento más controlado, pues primero se debe asegurar que el manipulador llegó con una articulación para mover la inmediatamente siguiente.
+
+- Trayectoria del TCP: En el modo simultáneo, el efector final describe una trayectoria más directa en el espacio hacia su objetivo, lo que en trayectorias cortas puede asemejarse al trazado de una linea recta en el espacio. En el modo secuencial, el TCP realiza una trayectoria escalonada y fragmentada, describiendo arcos basante pronunciados que dependen de la articulación que se esté moviendo en ese instante.
+
+- Suavidad: El desplazamiento simultáneo resulta mucho más natural, armónico y fluido para la estructura mecánica. El control secuencial, al arrancar y detenerse en cada eslabón, genera un movimiento rígido que puede inducir mayores vibraciones e inercia en la base del manipulador, aunque en el desplazamiento simultaneo también se evidencian efectos de inercia pero en menor magnitud.
+
+## Actividad 9. Interpolación de trayectorias
+
+En esta actividad se implementó un algoritmo de interpolación de trayectorias. Este método permite calcular puntos intermedios entre una configuración articular inicial y una configuración objetivo a lo largo de un tiempo determinado, generando perfiles de movimiento suaves para cada servomotor. Durante la ejecución de las pruebas físicas, se registraron los datos cinemáticos de las articulaciones para analizar su comportamiento en el tiempo.
+
+```python
+#
+```
+
+A continuación, se presentan las gráficas resultantes que ilustran la evolución de las posiciones articulares durante el movimiento interpolado:
+
+****diez graficas
+
+Al analizar las gráficas y el comportamiento físico del manipulador bajo los dos métodos de interpolación, se concluye que ambos algoritmos ofrecen un buen performance general, logrando que el movimiento del robot sea suave y controlado. Sin embargo, al observar el detalle del seguimiento de trayectoria de los servomotores, se evidencian las siguientes diferencias:
+
+- Interpolación Lineal: Se notó que la diferencia entre la trayectoria deseada calculada por el algoritmo y la posición actual reportada por el motor se mantiene casi constante a lo largo de todo el movimiento. Esto ocurre porque la interpolación lineal asume una velocidad constante que arranca y se detiene abruptamente, obligando al motor a mantener un "retraso" constante mientras intenta perseguir el punto objetivo que avanza linealmente.
+- Interpolación Cúbica: Por otro lado, en la interpolación cúbica se nota una mejora significativa. La diferencia entre la trayectoria actual y la deseada se mantiene casi constante durante el recorrido, pero al final del ciclo es menor. Gracias a que este método genera un perfil de velocidades suave, el servomotor tiene la dinámica adecuada para alcanzar su posición final con mayor prontitud.
+
+
+
+
