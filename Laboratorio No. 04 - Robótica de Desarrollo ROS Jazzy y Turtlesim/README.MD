@@ -21,8 +21,9 @@ Facultad de Ingeniería – Sede Bogotá
 - [Letras personalizadas](#explicación-del-dibujo-de-letras-personalizadas)
 - [Sistema líder-seguidor](#explicación-del-sistema-líder-seguidor-con-dos-tortugas)
 - [Nodos, tópicos y servicios](#descripción-de-los-nodos-tópicos-y-servicios-utilizados)
-- [Evidencias](#evidencias-de-ejecución-del-programa)
+- [Evidencias de ejecución del programa](#evidencias-de-ejecución-del-programa)
 - [Diagrama de flujo del sistema](#diagrama-de-flujo-del-sistema)
+- [Evidencias de funcionamiento](#evidencia-de-funcionamiento)
 - [Anexos](#anexos)
 
 ---
@@ -213,9 +214,21 @@ flowchart TD
 ```
 
 
-# Anexos
+## Evidencia de funcionamiento
+
+
+
+
+
+
+
+## Anexos
 
 Con el fin de facilitar la revisión del laboratorio, se incluyen los archivos fuente desarrollados durante la implementación de la solución. Ambos nodos fueron programados en Python utilizando la biblioteca **rclpy**, siguiendo una estructura modular y documentada mediante comentarios que describen las funciones principales del sistema.
+
+## Video explicativo
+
+
 
 ## Archivos
 
