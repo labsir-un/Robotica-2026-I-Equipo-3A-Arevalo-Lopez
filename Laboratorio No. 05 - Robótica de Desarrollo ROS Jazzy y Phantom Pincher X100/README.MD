@@ -108,24 +108,21 @@ Video de la actividad: https://drive.google.com/file/d/1rA8Yq21tCDFGd_gvHkw8H_Xc
 #
 ```
 
-
-
 ## Actividad 8. Movimiento secuencial
 
 A diferencia de la actividad anterior, se desarrolló un script para alcanzar las configuraciones objetivo moviendo las articulaciones de manera estrictamente ordenada y enviando las nuevas configuraciones cuando se haya alcanzado el objetivo inmediatamente anterior. La configuración que se ejecutó en esta actividad fue [25, 25, 20, −20, 0].
 
-Video de la actividad: https://drive.google.com/file/d/1VxGd0qiSDAjpTuCy9eNmYjI9JmpYDU3C/view?usp=sharing
 
 ```python
 #
 ```
 
+Video de la actividad: https://drive.google.com/file/d/1VxGd0qiSDAjpTuCy9eNmYjI9JmpYDU3C/view?usp=sharing
+
 Comparativamente, podemos mencionar que:
 
 - Tiempo de ejecución: El movimiento simultáneo es significativamente más eficiente y rápido, ya que todos los actuadores operan en paralelo. Por su parte, el movimiento secuencial es más lento porque acumula los tiempos de desplazamiento de cada motor de forma individual. Sin embargo, este último cuenta con un movimiento más controlado, pues primero se debe asegurar que el manipulador llegó con una articulación para mover la inmediatamente siguiente.
-
 - Trayectoria del TCP: En el modo simultáneo, el efector final describe una trayectoria más directa en el espacio hacia su objetivo, lo que en trayectorias cortas puede asemejarse al trazado de una linea recta en el espacio. En el modo secuencial, el TCP realiza una trayectoria escalonada y fragmentada, describiendo arcos basante pronunciados que dependen de la articulación que se esté moviendo en ese instante.
-
 - Suavidad: El desplazamiento simultáneo resulta mucho más natural, armónico y fluido para la estructura mecánica. El control secuencial, al arrancar y detenerse en cada eslabón, genera un movimiento rígido que puede inducir mayores vibraciones e inercia en la base del manipulador, aunque en el desplazamiento simultaneo también se evidencian efectos de inercia pero en menor magnitud.
 
 ## Actividad 9. Interpolación de trayectorias
@@ -145,6 +142,64 @@ Al analizar las gráficas y el comportamiento físico del manipulador bajo los d
 - Interpolación Lineal: Se notó que la diferencia entre la trayectoria deseada calculada por el algoritmo y la posición actual reportada por el motor se mantiene casi constante a lo largo de todo el movimiento. Esto ocurre porque la interpolación lineal asume una velocidad constante que arranca y se detiene abruptamente, obligando al motor a mantener un "retraso" constante mientras intenta perseguir el punto objetivo que avanza linealmente.
 - Interpolación Cúbica: Por otro lado, en la interpolación cúbica se nota una mejora significativa. La diferencia entre la trayectoria actual y la deseada se mantiene casi constante durante el recorrido, pero al final del ciclo es menor. Gracias a que este método genera un perfil de velocidades suave, el servomotor tiene la dinámica adecuada para alcanzar su posición final con mayor prontitud.
 
+
+## Actividad 10. Seguimiento de trayectoria sinusoidal
+
+Para evaluar la capacidad de respuesta dinámica del manipulador, se implementó una rutina donde la articulación del codo describe una trayectoria sinusoidal continua en el tiempo. El objetivo de esta prueba fue analizar cómo el cambio en la frecuencia de la señal (que se traduce en la rapidez del movimiento) afecta la capacidad del servomotor para seguir la ruta deseada con precisión.
+
+```python
+#
+```
+
+A continuación, se presentan las gráficas y los indicadores que contrastan la posición calculada (deseada) contra la posición medida (real) por el actuador del codo a diferentes frecuencias:
+
+***4GRAFICAS
+
+| Amplitud (°) | Frecuencia (Hz) | Error máximo (°) | Error cuadrático medio |
+| :--- | :---: | :---: | :---: |
+| 70 | 0.1 | 27.867 | 16.839 |
+| 70 | 0.3 | 88.780 | 53.981 |
+| 40 | 0.1 | 17.164 | 9.662 |
+| 40 | 0.3 | 53.911 | 30.261 |
+
+
+Al analizar el comportamiento físico del manipulador y los datos graficados, se evidenció una relación directa entre la frecuencia de la trayectoria y la magnitud del error de seguimiento.
+
+Se pudo notar que los errores son significativamente más grandes cuando la frecuencia del movimiento es más alta y cuando se aumenta la amplitud. Esto se debe a que una mayor frecuencia exige una mayor velocidad y aceleración instantánea en la articulación del codo para poder completar el ciclo en menos tiempo. De manera equivalente, si se aumenta la amplitud, el manipulador debe recorrer mayor distancia en el mismo tiempo. Al someter al servomotor a esta alta demanda, las limitaciones mecánicas y de control del sistema se hacen evidentes, impidiendo que el motor alcance la posición a tiempo. Como consecuencia, se genera un desfase o "lag" evidente, resultando en una mayor diferencia entre la posición calculada teóricamente y la posición real que el sensor logra medir en ese instante de tiempo.
+
+## Actividad 13. Enseñanza y repetición de poses
+
+Para esta sección, se desarrolló un nodo que habilita un modo de "enseñanza" en el robot.Este programa permite mover el manipulador manualmente o por comandos hacia posiciones específicas, guardar la configuración articular actual, y asignarle un nombre identificador. En total se registraron y almacenaron ocho poses diferentes. Para garantizar la persistencia de los datos, estas posturas fueron guardadas en un archivo de configuración .yaml. Finalmente, la rutina de repetición lee este archivo y reproduce las poses en el orden registrado.
+
+```python
+#
+```
+
+Video de la actividad: https://drive.google.com/file/d/1MSOlKdJN_5hVDOVZibstTrmE93f5_dvs/view?usp=sharing
+
+##Actividad 14. Trazado de una figura
+
+Con el fin de validar la cinemática inversa del manipulador, se procedió a realizar el trazado de un circulo en el aire. Para lograr esto, la trayectoria geométrica no se programó enviando ángulos directamente a los motores, sino que se definió mediante una lista de coordenadas de puntos cartesianos ($x, y, z$) en el espacio de trabajo. Posteriormente, el algoritmo resuelve matemáticamente la cinemática inversa para cada uno de estos puntos, calculando y enviando los ángulos articulares exactos que el robot requiere para mover el efector final y dibujar la figura de manera continua.
+
+```python
+#
+```
+
+Video de la actividad: https://drive.google.com/file/d/1JRePLEliDOunOihFoKglDp_1wM7lftwG/view?usp=sharing
+
+El comportamiento presentado en la prueba física es el esperado en cuanto a la determinación de las configuraciones articulares: el trazado del circulo es fácil de apreciar e identificar. Sin embargo, el movimiento no se nota tan fluido, lo que puede deberse principalemente a componentes inerciales al mover el manipulador.
+
+## Actividad 15. Coreografía robótica
+
+Como cierre del laboratorio, se integraron los conceptos de control de movimiento, tiempos de transición e interpolación para programar una coreografía robótica automatizada al ritmo de la canción Chipi Chipi Chapa Chapa. El desarrollo de esta actividad cumple rigurosamente con los parámetros de sincronización, participación total, duración, autonomía y seguridad.
+
+Python# [PEGA AQUÍ TU CÓDIGO DE PYTHON DE LA COREOGRAFÍA]
+
+Video de la actividad:
+
+Se evidenció un comportamiento fluido en su mayoría. La mayor parte de las inconsistencias en el movimiento se deben a efectos inerciales, por ejemplo, cuando el hombro tiene una configuración articular cercana a 90° o -90° y el brazo está totalmente estirado.
+
+## Referencias
 
 
 
