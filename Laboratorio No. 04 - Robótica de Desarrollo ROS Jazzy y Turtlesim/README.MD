@@ -115,6 +115,84 @@ La utilización conjunta de estos nodos, tópicos y servicios permitió construi
 
 ## Evidencias de ejecución del programa
 
+1) `ros2 topic list`
+
+![Salida del comando ros2 topic list](files/Topic_list.jpeg)
+
+**Análisis de los resultados:**
+Al ejecutar este comando, logramos evidenciar y confirmar la estructura de comunicación bidireccional de nuestro proyecto. En la salida de la consola identificamos dos tipos de tópicos fundamentales para nuestra lógica:
+
+* **Tópicos de Acción (`/turtle1/cmd_vel` y `/turtle2/cmd_vel`):** Comprobamos que los canales de velocidad estaban instanciados correctamente. Es a través de estos tópicos que nuestros scripts de Python logran inyectar las instrucciones de movimiento continuo hacia el simulador.
+* **Tópicos de Estado (`/turtle1/pose` y `/turtle2/pose`):** Confirmamos la existencia de los canales de retroalimentación. Nuestros nodos se suscriben a estos tópicos específicos para extraer las coordenadas $(x, y)$ en tiempo real, lo cual es el pilar matemático que permite calcular la distancia y mantener el seguimiento entre el líder y el seguidor.
+
+Adicionalmente, la consola reveló tópicos de infraestructura nativos de ROS 2, como `/parameter_events` y `/rosout`. Aunque no los programamos explícitamente en nuestro código, comprender su aparición fue clave, ya que son los encargados de gestionar los parámetros globales y los registros del sistema (logs) que mantienen estable la arquitectura.
+
+2) `ros2 node list`
+
+![Salida del comando ros2 node list](files/Node_list.jpeg)
+
+
+**Análisis de los resultados:**
+La ejecución de este comando fue clave para confirmar que nuestros scripts de Python se inicializaron y registraron correctamente en el ecosistema de ROS 2. La consola nos devolvió exactamente los tres nodos que componen nuestra arquitectura de software:
+
+* **`/turtlesim`**: Es el nodo base proporcionado por el paquete de ROS 2. Actúa como el entorno de simulación gráfico donde visualizamos a las tortugas.
+* **`/turtle_controller`**: Este nodo corresponde a nuestro script principal de control manual y trayectorias automáticas (`move_turtle.py`). Se puede notar que, aunque el archivo en disco tiene un nombre, el comando revela el nombre interno con el que inicializamos la clase en el código (`super().__init__('turtle_controller')`), demostrando cómo los nodos se presentan ante la red.
+* **`/turtle_follower`**: Corresponde a nuestro segundo script (`turtle_follower.py`). Su presencia en la lista confirma que el nodo encargado de calcular la cinemática de persecución y publicar las velocidades de compensación está  operando en paralelo al controlador principal.
+
+
+3) `ros2 topic echo /turtle1/pose`
+
+![Salida del comando ros2 topic echo](files/Echo_pose.jpeg)
+
+**Análisis de los resultados:**
+Al lanzar el comando, la terminal comenzó a imprimir un flujo continuo de bloques de datos. Esta información corresponde a la estructura del mensaje tipo `Pose`, revelando la telemetría en vivo de la tortuga líder: sus coordenadas espaciales (`x`, `y`), su orientación (`theta`), y sus velocidades instantáneas (`linear_velocity`, `angular_velocity`).
+
+**Relación con la arquitectura ROS 2:**
+Este comando nos permitió visualizar en la práctica el concepto fundamental de "Suscripción" y flujo de datos. Los números que vemos en pantalla son exactamente los datos crudos que nuestro script `turtle_follower.py` está consumiendo a una cierta frecuencia (20 Hz). Al confirmar que el tópico `/turtle1/pose` transmite coordenadas precisas y actualizadas, comprobamos que el nodo seguidor cuenta con la información correcta para calcular la distancia euclidiana y la corrección angular necesarias para perseguir al líder.
+
+4) `ros2 topic info /turtle1/cmd_vel`
+
+![Salida del comando ros2 topic info](files/Info_cmd_vel.jpeg)
+
+**Análisis de los resultados:**
+A diferencia del comando `echo` (que nos mostraba los datos crudos en vivo), el comando `info` nos proporcionó la topología de conexión de este tópico en particular. La terminal nos arrojó tres datos fundamentales que validan nuestro diseño:
+
+* **Type (`geometry_msgs/msg/Twist`):** La consola confirma el formato estructurado del mensaje que transita por esta vía. Este dato es crucial, ya que concuerda exactamente con la importación que realizamos en la línea 11 de nuestro script `move_turtle.py`. Es un mensaje estándar de ROS 2 diseñado específicamente para cinemática, compuesto por vectores tridimensionales de velocidad lineal y angular.
+* **Publisher count: 1:** Nos indica que hay exactamente una entidad escribiendo en este canal. En la arquitectura de nuestro laboratorio, este publicador solitario es nuestro nodo `/turtle_controller`, el cual inyecta las velocidades calculadas a partir de las interacciones con el teclado o las rutinas de las figuras geométricas.
+* **Subscription count: 1:** Confirma que hay un nodo a la escucha de estas órdenes. Este suscriptor es el nodo base `/turtlesim`, que recibe el mensaje `Twist` y lo traduce inmediatamente en el movimiento gráfico de la tortuga sobre el lienzo azul.
+
+*(Nota adicional: Como se aprecia en la captura, realizamos el mismo ejercicio de inspección para `/turtle2/cmd_vel`, obteniendo resultados idénticos, donde el publicador es nuestro nodo seguidor y el suscriptor sigue siendo el simulador).*
+
+En conclusión, esta inspección nos permitió comprobar de manera formal que el patrón de diseño "Publicador-Suscriptor" se estableció de forma correcta y uno a uno (1:1) para la gestión del movimiento en ambas tortugas.
+
+5) `ros2 service list`
+
+![Salida del comando ros2 service list](files/Service_list.jpeg)
+
+**Análisis de los resultados:**
+Al desplegar la lista de servicios activos, pudimos categorizarlos en dos grandes grupos que explican el comportamiento de nuestro sistema:
+
+* **Servicios de Simulación y Control:** En la parte superior de la lista identificamos los servicios expuestos por el nodo `/turtlesim`. Entre ellos destacan aquellos que nuestros scripts consumen explícitamente como clientes:
+  * **`/spawn`:** Utilizado por nuestro `turtle_follower` al inicializarse para hacer aparecer a la segunda tortuga en el lienzo.
+  * **`/turtle1/set_pen` y `/turtle1/teleport_absolute`:** Consumidos por nuestro `turtle_controller` para acivar o desactivar el trazo y reiniciar la posición al presionar teclas específicas.
+  * También notamos servicios generados dinámicamente, como `/turtle2/set_pen`, el cual fue creado por el simulador en el instante exacto en que instanciamos a la segunda tortuga.
+
+* **Servicios Automáticos de Parámetros:** Más de la mitad de la lista está compuesta por servicios con el sufijo `parameters` (ej. `describe_parameters`, `get_parameters`, `set_parameters`). Aunque no los programamos manualmente, su presencia es el comportamiento esperado en la arquitectura de ROS 2. Al heredar de la clase base `Node` en Python (con `super().__init__('nombre_del_nodo')`), el framework inyecta automáticamente esta infraestructura de servicios en `/turtle_controller`, `/turtle_follower` y `/turtlesim` para permitir la configuración y consulta de parámetros en tiempo de ejecución.
+
+Con esta última inspección, corroboramos que la topología de nuestro laboratorio incluye tanto canales de comunicación en tiempo real (tópicos) para el cálculo de cinemática, como llamadas puntuales (servicios) para la gestión de eventos de la simulación.
+
+6) `rqt_graph`
+
+![Salida del comando rqt_graph](files/rqt%20graph.jpeg)
+
+**Análisis de los resultados y Relación con la Arquitectura:**
+El grafo generado resume a la perfección la arquitectura líder-seguidor implementada en nuestro código. En el diagrama, los óvalos representan nuestros nodos activos y las flechas ilustran el flujo direccional de los datos a través de los tópicos (rectángulos):
+
+* **Lazo de Control del Líder:** Se observa claramente la conexión donde nuestro `/turtle_controller` inyecta datos de velocidad hacia el simulador a través de `/turtle1/cmd_vel`, y a su vez, lee la posición actual mediante `/turtle1/pose`.
+* **Lógica de Persecución:** El diagrama destaca el papel central del nodo `/turtle_follower`. Visualmente se comprueba que este nodo requiere doble información: recibe flechas tanto de `/turtle1/pose` (para saber a dónde ir) como de `/turtle2/pose` (para saber dónde está), procesa esa diferencia espacial y finalmente envía una flecha de salida hacia `/turtle2/cmd_vel` para ejecutar la persecución.
+
+*Nota:* Es importante destacar que `rqt_graph` grafica exclusivamente las conexiones continuas y asíncronas (tópicos). Como se evidenció en la inspección visual, la herramienta omite intencionalmente las conexiones por servicios (como `/spawn` o `/turtle1/teleport_absolute` utilizados en nuestros scripts), dado que estos operan como transacciones síncronas de un solo instante y no como flujos permanentes de datos.
+
 
 
 ## Diagrama de flujo del sistema
@@ -216,10 +294,21 @@ flowchart TD
 
 ## Evidencia de funcionamiento
 
+1) **Movimiento manual de la tortuga.**
 
+![Salida del comando rqt_graph](files/Movimiento_manual.jpeg)
 
+2) **Dibujo de figuras geométricas.**
 
+![Salida del comando rqt_graph](files/Figuras_geometricas.jpeg)
 
+3) **Dibujo de letras personalizadas.**
+
+![Salida del comando rqt_graph](files/Letras_automaticas.jpeg)
+
+4) **Funcionamiento del sistema líder-seguidor.**
+
+![Salida del comando rqt_graph](files/Lider_seguidor.jpeg)
 
 
 ## Anexos
