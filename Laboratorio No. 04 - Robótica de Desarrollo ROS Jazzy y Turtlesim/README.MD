@@ -28,7 +28,7 @@ Facultad de Ingeniería – Sede Bogotá
 
 ---
 
-## Descripción general del laboratorio
+# Descripción general del laboratorio
 
 El presente laboratorio tuvo como objetivo desarrollar una aplicación de control para el simulador **Turtlesim** utilizando **ROS 2 Jazzy Jalisco** y el lenguaje de programación **Python** mediante la biblioteca **rclpy**. Durante el desarrollo se implementaron dos nodos principales: `move_turtle.py`, encargado del control y la interacción con la tortuga principal, y `turtle_follower.py`, responsable de crear una segunda tortuga y realizar un seguimiento automático de la primera.
 
@@ -38,7 +38,7 @@ Como complemento, se desarrolló el nodo **turtle_follower.py**, cuya función c
 
 Finalmente, el laboratorio permitió aplicar los conceptos fundamentales de ROS 2 relacionados con la creación de nodos, publicación y suscripción a tópicos, utilización de servicios, temporizadores y programación de aplicaciones distribuidas. Asimismo, se evidenció la interacción entre múltiples nodos ejecutándose simultáneamente y comunicándose mediante la arquitectura de ROS 2 para implementar un sistema completo de control y seguimiento en un entorno de simulación.
 
-## Explicación del control manual de la tortuga
+# Explicación del control manual de la tortuga
 
 El control manual de la tortuga fue implementado mediante el nodo `move_turtle.py`, el cual actúa como interfaz entre el usuario y el simulador **Turtlesim**. Para ello, el nodo captura continuamente las pulsaciones del teclado utilizando las bibliotecas `termios`, `tty` y `select`, permitiendo leer las teclas sin necesidad de presionar la tecla Enter y sin bloquear la ejecución del programa.
 
@@ -48,7 +48,7 @@ Posteriormente, el mensaje es publicado sobre el tópico `/turtle1/cmd_vel`, al 
 
 Para evitar conflictos entre el control del usuario y los movimientos automáticos, el programa emplea variables de estado que indican cuándo la tortuga se encuentra ejecutando una rutina de dibujo o un modo autónomo. Mientras una de estas tareas está activa, la lectura del teclado se restringe únicamente a los comandos de interrupción o control, garantizando que cada trayectoria se complete correctamente sin recibir órdenes contradictorias.
 
-## Explicación de las funciones automáticas implementadas
+# Explicación de las funciones automáticas implementadas
 
 Además del control manual de la tortuga, se implementó un conjunto de funciones automáticas que pueden ejecutarse mediante diferentes teclas del teclado. Cada una de estas acciones fue desarrollada como un método independiente dentro del nodo `move_turtle.py`, permitiendo mantener una estructura modular y facilitando la organización del código.
 
@@ -88,7 +88,7 @@ Con esta información se genera un mensaje de tipo `Twist` para controlar el mov
 
 Finalmente, el mensaje de velocidad es publicado sobre el tópico `/turtle2/cmd_vel`, provocando que la segunda tortuga modifique continuamente su trayectoria para seguir los desplazamientos de la tortuga principal. Gracias a esta arquitectura distribuida, el sistema mantiene separadas las responsabilidades de cada nodo: `move_turtle.py` gestiona el control del usuario y las trayectorias automáticas de `turtle1`, mientras que `turtle_follower.py` implementa de manera completamente autónoma el comportamiento de seguimiento utilizando únicamente la información intercambiada mediante tópicos y servicios de ROS 2.
 
-## Descripción de los nodos, tópicos y servicios utilizados
+# Descripción de los nodos, tópicos y servicios utilizados
 
 La aplicación desarrollada se encuentra compuesta por dos nodos principales, además del nodo `turtlesim_node` proporcionado por el simulador Turtlesim. La comunicación entre estos nodos se realiza mediante la arquitectura de ROS 2, utilizando tópicos para el intercambio continuo de información y servicios para la ejecución de acciones específicas.
 
@@ -113,7 +113,7 @@ De igual forma, los servicios empleados durante la implementación fueron:
 
 La utilización conjunta de estos nodos, tópicos y servicios permitió construir una aplicación distribuida en la que cada nodo cumple una función específica y se comunica con los demás mediante los mecanismos propios de ROS 2. 
 
-## Evidencias de ejecución del programa
+# Evidencias de ejecución del programa
 
 1) `ros2 topic list`
 
@@ -195,7 +195,7 @@ El grafo generado resume a la perfección la arquitectura líder-seguidor implem
 
 
 
-## Diagrama de flujo del sistema
+# Diagrama de flujo del sistema
 
 ```mermaid
 flowchart TD
@@ -292,7 +292,7 @@ flowchart TD
 ```
 
 
-## Evidencia de funcionamiento
+# Evidencia de funcionamiento
 
 1) **Movimiento manual de la tortuga.**
 
@@ -310,8 +310,10 @@ flowchart TD
 
 ![Salida del comando rqt_graph](files/Lider_seguidor.jpeg)
 
+La ejecución de estas pruebas demuestra que nuestro sistema funciona correctamente al integrar las piezas de código que desarrollamos. Validamos que el nodo principal logra ejecutar órdenes directas, como dibujar figuras o letras, utilizando las herramientas de control de ROS 2. Asimismo, comprobamos que el sistema líder-seguidor responde de forma fluida y coordinada al procesar en tiempo real la posición de las tortugas. En conjunto, estos resultados confirman que la arquitectura está bien comunicada y que cada parte del sistema cumple su función según lo esperado.
 
-## Anexos
+
+# Anexos
 
 Con el fin de facilitar la revisión del laboratorio, se incluyen los archivos fuente desarrollados durante la implementación de la solución. Ambos nodos fueron programados en Python utilizando la biblioteca **rclpy**, siguiendo una estructura modular y documentada mediante comentarios que describen las funciones principales del sistema.
 

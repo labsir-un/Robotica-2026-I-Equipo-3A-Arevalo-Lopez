@@ -53,7 +53,8 @@ class Follower(Node):
         self.pose1 = msg
 
     def pose2_callback(self, msg):
-        # Callback invocado automáticamente al recibir datos de /turtle2/pose
+        # Función ejecutada periódicamente por el temporizador.
+        # Calcula el movimiento necesario para que turtle2 siga a turtle1.
         self.pose2 = msg
 
     def control_loop(self):

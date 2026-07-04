@@ -81,7 +81,6 @@ class TurtleController(Node):
     def execute_movement(self, linear, angular, duration):
         # Ejecuta un movimiento de velocidad constante durante un tiempo específico
         start_time = time.time()
-        start_time = time.time()
         msg = Twist()
         msg.linear.x = linear
         msg.angular.z = angular
@@ -242,7 +241,7 @@ class TurtleController(Node):
         
         # TECLAS DE LAS INICIALES
         elif key.lower() == 'e': self.auto_mode = False; self.draw_E()
-        elif key.lower() == 'z': self.auto_mode = False; self.draw_A()
+        elif key.lower() == 'z': self.auto_mode = False; self.draw_A()# Z se utiliza para representar la letra A.
         elif key.lower() == 'j': self.auto_mode = False; self.draw_J()
         elif key.lower() == 'l': self.auto_mode = False; self.draw_L()
         
