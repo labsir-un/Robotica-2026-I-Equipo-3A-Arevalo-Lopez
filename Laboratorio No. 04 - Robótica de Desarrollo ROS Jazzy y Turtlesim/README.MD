@@ -319,7 +319,10 @@ Con el fin de facilitar la revisión del laboratorio, se incluyen los archivos f
 
 ## Video explicativo
 
+https://youtu.be/O7E182vML3ghttps://www.youtube.com/watch?v=O7E182vML3g
 
+
+[![Demo](https://img.youtube.com/vi/O7E182vML3g/0.jpg)](https://www.youtube.com/watch?v=O7E182vML3g)
 
 ## Archivos
 
