@@ -40,9 +40,9 @@ En la siguiente imagen, se ilustran las articulaciones principales junto con sus
 
 ![image](http://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/articulaciones.png)
 
- En la siguiente imagen, se detallan los IDs correspondientes a cada servomotor.
+En la siguiente imagen, se detallan los IDs correspondientes a cada servomotor.
 
-![image](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/articulaciones.png)
+![image](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/motores.png)
 
 A partir de esta inspección visual y técnica, se consolidó la siguiente información: 
 
