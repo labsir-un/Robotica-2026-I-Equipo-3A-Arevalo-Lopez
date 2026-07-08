@@ -48,11 +48,11 @@ A partir de esta inspección visual y técnica, se consolidó la siguiente infor
 
 | Articulación | ID | Referencia | Sentido positivo | Función |
 | :--- | :---: | :--- | :--- | :--- |
-| **Base** | 1 | 0° (Frente al área de trabajo) | Antihorario (visto desde arriba, eje Z hacia arriba) | Rotación panorámica de toda la estructura del brazo. |
-| **Hombro** | 2 | 0° (Alineado verticalmente) | Antihorario (visto desde el lateral derecho, eje Z saliente) | Elevación e inclinación del eslabón principal. |
-| **Codo** | 3 | 0° (Alineado con el eslabón anterior) | Antihorario (visto desde el lateral derecho, eje Z saliente) | Extensión y flexión del antebrazo. |
-| **Muñeca** | 4 | 0° (Alineado con el eslabón anterior) | Antihorario (visto desde el lateral derecho, eje Z saliente) | Orientación de cabeceo del efector final. |
-| **Pinza** | 5 | 0° (Apertura máxima) | Cierre de las mordazas | Agarre, sujeción y liberación de objetos. |
+| **Base** | 001 | 0° (Frente al área de trabajo) | Antihorario (visto desde arriba, eje Z hacia arriba) | Rotación panorámica de toda la estructura del brazo. |
+| **Hombro** | 002 | 0° (Alineado verticalmente) | Antihorario (visto desde el lateral derecho, eje Z saliente) | Elevación e inclinación del eslabón principal. |
+| **Codo** | 003 | 0° (Alineado con el eslabón anterior) | Antihorario (visto desde el lateral derecho, eje Z saliente) | Extensión y flexión del antebrazo. |
+| **Muñeca** | 004 | 0° (Alineado con el eslabón anterior) | Antihorario (visto desde el lateral derecho, eje Z saliente) | Orientación de cabeceo del efector final. |
+| **Pinza** | 005 | 0° (Apertura máxima) | Cierre de las mordazas | Agarre, sujeción y liberación de objetos. |
 
 
 ## Actividad 3. Medición del robot
@@ -61,7 +61,7 @@ Para modelar la geometría del manipulador, se procedió a determinar las dimens
 
 Cabe resaltar que este diagrama y los sistemas de referencia aquí definidos fueron establecidos mediante el método visto en clase para cinemática directa. Dicho diagrama se tendrá en cuenta para la actividad de cinemática directa.
 
-*** INSERTAR ESQUEMA
+![image](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/diagrama.png)
 
 A partir de la medición del manipulador mediante calibrador, se consolidaron las siguientes medidas (en mm):
 
