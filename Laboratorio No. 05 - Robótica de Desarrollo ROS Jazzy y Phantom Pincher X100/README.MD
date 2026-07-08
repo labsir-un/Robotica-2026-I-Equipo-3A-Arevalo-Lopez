@@ -79,22 +79,17 @@ A partir de la medición del manipulador mediante calibrador, se consolidaron la
 
 ## Actividad 4. Movimiento individual de articulaciones
 
-Para esta actividad se desarrolló un nodo en Python bajo el framework de **ROS 2 Jazzy** con el objetivo de controlar de forma independiente y selectiva cada una de las articulaciones del robot Phantom X Pincher X100 (base, hombro, codo, muñeca y pinza). 
+Para esta actividad se desarrolló un nodo en Python bajo el framework de **ROS 2 Jazzy** con el objetivo de controlar de forma independiente y selectiva cada una de las articulaciones del robot (base, hombro, codo, muñeca y pinza). 
 
 El programa permite al usuario interactuar a través de la terminal para seleccionar la articulación que desea mover y definir la posición angular objetivo. Como medida de seguridad, el código valida que el ángulo ingresado se encuentre dentro de los límites seguros determinados previamente en la Actividad 6 antes de enviar el comando a los servomotores Dynamixel AX-12A.
 
 Para comprobar el correcto funcionamiento del control y la respuesta física del manipulador, se realizaron pruebas independientes en cada articulación ejecutando al menos tres (3) posiciones angulares distintas y retornando exitosamente a la posición de referencia (0° / posición de home) tras cada movimiento.
 
-A continuación, se adjunta el código fuente completo implementado en Python para el desarrollo de esta actividad:
 
-```python
-#
-```
+
+La verificación física en video de esta actividad, donde se detalla el movimiento secuencial de las articulaciones pasando por las tres posiciones de prueba y su respectivo retorno a la posición segura, se encuentra en el siguiente link:
 
 ### Evidencia en Video
-
-La verificación física de esta actividad, donde se detalla el movimiento secuencial de las articulaciones pasando por las tres posiciones de prueba y su respectivo retorno a la posición segura, se encuentra en el siguiente link:
-
 
 
 
