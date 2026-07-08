@@ -22,13 +22,16 @@ Para dar inicio a las pruebas experimentales, se llevó a cabo el protocolo de i
 1. Posicionamiento inicial: Se ubicó el robot manipulador en una posición segura antes de cualquier manipulación eléctrica.
 2. Conexión de interfaz de datos: Se verificó la conexión de la red de servomotores  y se conectó el adaptador de comunicación TTL (U2D2) al puerto USB del computador para establecer la comunicación serial con los motores Dynamixel.
 3. Energización del sistema: Una vez aseguradas las conexiones de datos, se energizó el sistema encendiendo la fuente de alimentación, siguiendo estrictamente las indicaciones del docente.
+
+![image](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/ACT1.png)
+
+
 4. Validación en entorno virtual: Como paso final de comprobación, se verificó que el estado y la posición del modelo tridimensional visualizado en la herramienta RViz correspondiera correctamente con la postura física actual del manipulador.
 
 **ACLARACIÓN*************************
 
 ![image](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/homeRVIZ.png)
 
-![image](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/ACT1.png)
 
 
 ## Actividad 2. Identificación de motores y articulaciones
