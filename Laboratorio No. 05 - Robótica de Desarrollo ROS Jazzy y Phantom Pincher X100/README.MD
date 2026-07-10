@@ -165,15 +165,10 @@ A continuación, se presentan las gráficas resultantes que ilustran la evoluci�
 
 ![image](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/EC4.png)
 
-
-
-****diez graficas
-
 Al analizar las gráficas y el comportamiento físico del manipulador bajo los dos métodos de interpolación, se concluye que ambos algoritmos ofrecen un buen performance general, logrando que el movimiento del robot sea suave y controlado. Sin embargo, al observar el detalle del seguimiento de trayectoria de los servomotores, se evidencian las siguientes diferencias:
 
 - Interpolación Lineal: Se notó que la diferencia entre la trayectoria deseada calculada por el algoritmo y la posición actual reportada por el motor se mantiene casi constante a lo largo de todo el movimiento. Esto ocurre porque la interpolación lineal asume una velocidad constante que arranca y se detiene abruptamente, obligando al motor a mantener un "retraso" constante mientras intenta perseguir el punto objetivo que avanza linealmente.
-- Interpolación Cúbica: Por otro lado, en la interpolación cúbica se nota una mejora significativa. La diferencia entre la trayectoria actual y la deseada se mantiene casi constante durante el recorrido, pero al final del ciclo es menor. Gracias a que este método genera un perfil de velocidades suave, el servomotor tiene la dinámica adecuada para alcanzar su posición final con mayor prontitud.
-
+- Interpolación Cúbica: Por otro lado, en la interpolación cúbica se nota una mejora significativa. La diferencia entre la trayectoria actual y la deseada se mantiene considerablemente más baja al comienzo y al final del ciclo si la comparamos con el método de interpolación lineal analizado anteriormente. Gracias a que este método genera un perfil de velocidades suave, el servomotor tiene la dinámica adecuada para alcanzar su posición final con mayor prontitud, por lo que se preferiría emplear este método si se desea obtener un error menor.
 
 ## Actividad 10. Seguimiento de trayectoria sinusoidal
 
