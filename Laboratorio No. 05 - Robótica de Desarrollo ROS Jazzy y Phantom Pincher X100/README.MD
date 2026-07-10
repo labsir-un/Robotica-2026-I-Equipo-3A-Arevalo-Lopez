@@ -172,15 +172,20 @@ Al analizar las gráficas y el comportamiento físico del manipulador bajo los d
 
 ## Actividad 10. Seguimiento de trayectoria sinusoidal
 
-Para evaluar la capacidad de respuesta dinámica del manipulador, se implementó una rutina donde la articulación del codo describe una trayectoria sinusoidal continua en el tiempo. El objetivo de esta prueba fue analizar cómo el cambio en la frecuencia de la señal (que se traduce en la rapidez del movimiento) afecta la capacidad del servomotor para seguir la ruta deseada con precisión.
+Para evaluar la capacidad de respuesta dinámica del manipulador, se implementó una rutina donde la articulación del codo describe una trayectoria sinusoidal continua en el tiempo. El objetivo de esta prueba fue analizar cómo el cambio en la frecuencia y la amplitud de la señal (que se traduce en la rapidez del movimiento) afecta la capacidad del servomotor para seguir la ruta deseada con precisión.
 
-```python
-#
-```
+[Código del ejercicio](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/sinusoidal.py)
 
 A continuación, se presentan las gráficas y los indicadores que contrastan la posición calculada (deseada) contra la posición medida (real) por el actuador del codo a diferentes frecuencias:
 
-***4GRAFICAS
+![image](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/Sinu1.png)
+
+![image](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/Sinu2.png)
+
+![image](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/Sinu3.png)
+
+![image](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/Sinu4.png)
+
 
 | Amplitud (°) | Frecuencia (Hz) | Error máximo (°) | Error cuadrático medio |
 | :--- | :---: | :---: | :---: |
@@ -190,19 +195,15 @@ A continuación, se presentan las gráficas y los indicadores que contrastan la 
 | 40 | 0.3 | 53.911 | 30.261 |
 
 
-Al analizar el comportamiento físico del manipulador y los datos graficados, se evidenció una relación directa entre la frecuencia de la trayectoria y la magnitud del error de seguimiento.
-
-Se pudo notar que los errores son significativamente más grandes cuando la frecuencia del movimiento es más alta y cuando se aumenta la amplitud. Esto se debe a que una mayor frecuencia exige una mayor velocidad y aceleración instantánea en la articulación del codo para poder completar el ciclo en menos tiempo. De manera equivalente, si se aumenta la amplitud, el manipulador debe recorrer mayor distancia en el mismo tiempo. Al someter al servomotor a esta alta demanda, las limitaciones mecánicas y de control del sistema se hacen evidentes, impidiendo que el motor alcance la posición a tiempo. Como consecuencia, se genera un desfase o "lag" evidente, resultando en una mayor diferencia entre la posición calculada teóricamente y la posición real que el sensor logra medir en ese instante de tiempo.
+Al analizar el comportamiento físico del manipulador y los datos graficados, se evidenció una relación directa entre la frecuencia de la trayectoria y la magnitud del error de seguimiento. Se pudo notar que los errores son significativamente más grandes cuando la frecuencia del movimiento es más alta y cuando se aumenta la amplitud. Esto se debe a que una mayor frecuencia exige una mayor velocidad y aceleración instantánea en la articulación del codo para poder completar el ciclo en menos tiempo. De manera equivalente, si se aumenta la amplitud, el manipulador debe recorrer mayor distancia en el mismo tiempo. Al someter al servomotor a esta alta demanda, las limitaciones mecánicas y de control del sistema se hacen evidentes, impidiendo que el motor alcance la posición a tiempo. Como consecuencia, se genera un desfase o "lag" evidente, resultando en una mayor diferencia entre la posición calculada teóricamente y la posición real que el sensor logra medir en ese instante de tiempo.
 
 ## Actividad 13. Enseñanza y repetición de poses
 
-Para esta sección, se desarrolló un nodo que habilita un modo de "enseñanza" en el robot.Este programa permite mover el manipulador manualmente o por comandos hacia posiciones específicas, guardar la configuración articular actual, y asignarle un nombre identificador. En total se registraron y almacenaron ocho poses diferentes. Para garantizar la persistencia de los datos, estas posturas fueron guardadas en un archivo de configuración .yaml. Finalmente, la rutina de repetición lee este archivo y reproduce las poses en el orden registrado.
+Para esta sección, se desarrolló un nodo que habilita un modo de "enseñanza" en el robot. Este programa permite mover el manipulador manualmente o por comandos hacia posiciones específicas, guardar la configuración articular actual, y asignarle un nombre identificador. En total se registraron y almacenaron ocho poses diferentes. Para garantizar la persistencia de los datos, estas posturas fueron guardadas en un archivo de configuración .yaml. Finalmente, la rutina de repetición lee este archivo y reproduce las poses en el orden registrado.
 
-```python
-#
-```
+[Código del ejercicio](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/ensenanza.py)
 
-Video de la actividad: https://drive.google.com/file/d/1MSOlKdJN_5hVDOVZibstTrmE93f5_dvs/view?usp=sharing
+### Evidencia en Video
 
 ##Actividad 14. Trazado de una figura
 
