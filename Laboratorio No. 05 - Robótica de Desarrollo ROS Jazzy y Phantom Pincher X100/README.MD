@@ -14,17 +14,16 @@ Facultad de Ingeniería – Sede Bogotá
 
 ## Introducción
 
-El presente repositorio documenta el desarrollo del Laboratorio No. 05 de la asignatura de Robótica, cuyo propósito principal es controlar las articulaciones del manipulador Phantom X Pincher X100 utilizando el entorno de ROS 2 Jazzy. A través de este proyecto, se implementan soluciones a partir de los paquetes base provistos , abarcando desde la medición y el modelado geométrico del manipulador , hasta la aplicación de cinemática directa e inversa. Asimismo, se exploran diferentes tipos de control de movimiento (individual, simultáneo, secuencial e interpolado) , culminando con la programación de trayectorias, la repetición de poses y la ejecución de rutinas complejas o tareas artísticas.
+El presente repositorio documenta el desarrollo del Laboratorio No. 05 de la asignatura de Robótica, cuyo propósito principal es controlar las articulaciones del manipulador Phantom X Pincher X100 utilizando el entorno de ROS 2 Jazzy. A través de este proyecto, se implementan soluciones, abarcando desde la medición del manipulador, hasta la aplicación de cinemática directa e inversa. Asimismo, se exploran diferentes tipos de control de movimiento (individual, simultáneo, secuencial e interpolado), culminando con la programación de trayectorias, la repetición de poses y la ejecución de rutinas complejas o tareas artísticas.
 
 ## Actividad 1. Preparación del robot
 
 Para dar inicio a las pruebas experimentales, se llevó a cabo el protocolo de inicialización del sistema físico, garantizando la seguridad del equipo. El procedimiento simplificado consistió en los siguientes pasos:
 1. Posicionamiento inicial: Se ubicó el robot manipulador en una posición segura antes de cualquier manipulación eléctrica.
 2. Conexión de interfaz de datos: Se verificó la conexión de la red de servomotores  y se conectó el adaptador de comunicación TTL (U2D2) al puerto USB del computador para establecer la comunicación serial con los motores Dynamixel.
-3. Energización del sistema: Una vez aseguradas las conexiones de datos, se energizó el sistema encendiendo la fuente de alimentación, siguiendo estrictamente las indicaciones del docente.
+3. Energización del sistema: Una vez aseguradas las conexiones de datos, se energizó el sistema encendiendo la fuente de alimentación.
 
 ![image](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/ACT1.png)
-
 
 4. Validación en entorno virtual: Como paso final de comprobación, se verificó que el estado y la posición del modelo tridimensional visualizado en la herramienta RViz correspondiera correctamente con la postura física actual del manipulador.
 
@@ -57,7 +56,7 @@ A partir de esta inspección visual y técnica, se consolidó la siguiente infor
 
 ## Actividad 3. Medición del robot
 
-Para modelar la geometría del manipulador, se procedió a determinar las dimensiones físicas de sus componentes principales. En la Figura X se presenta el diagrama esquemático del robot, el cual ilustra las longitudes de los eslabones, las distancias entre los ejes de articulaciones consecutivas y la asignación de los sistemas de coordenadas para cada junta. 
+Para modelar la geometría del manipulador, se procedió a determinar las dimensiones físicas de sus componentes principales. En la siguiente figura se presenta el diagrama esquemático del robot, el cual ilustra las longitudes de los eslabones, las distancias entre los ejes de articulaciones consecutivas y la asignación de los sistemas de coordenadas para cada junta. 
 
 Cabe resaltar que este diagrama y los sistemas de referencia aquí definidos fueron establecidos mediante el método visto en clase para cinemática directa. Dicho diagrama se tendrá en cuenta para la actividad de cinemática directa.
 
@@ -85,9 +84,7 @@ El programa permite al usuario interactuar a través de la terminal para selecci
 
 Para comprobar el correcto funcionamiento del control y la respuesta física del manipulador, se realizaron pruebas independientes en cada articulación ejecutando al menos tres (3) posiciones angulares distintas y retornando exitosamente a la posición de referencia (0° / posición de home) tras cada movimiento.
 
-
-
-La verificación física en video de esta actividad, donde se detalla el movimiento secuencial de las articulaciones pasando por las tres posiciones de prueba y su respectivo retorno a la posición segura, se encuentra en el siguiente link:
+[Código del ejercicio](https://github.com/tu-usuario/tu-repositorio)
 
 ### Evidencia en Video
 
