@@ -212,6 +212,8 @@ Con el fin de validar la cinemática inversa del manipulador, se procedió a rea
 
 [Código del ejercicio](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/circuloinversa.py)
 
+Video del ejercicio
+
 [![Ver el video](https://img.youtube.com/vi/647Dq322C7E/maxresdefault.jpg)](https://www.youtube.com/watch?v=647Dq322C7E)
 
 647Dq322C7E
