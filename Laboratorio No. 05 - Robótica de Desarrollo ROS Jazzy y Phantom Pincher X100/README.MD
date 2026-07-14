@@ -90,6 +90,27 @@ Los ángulos proporcionados para cada articulación se muestran en el video adju
 
 [![Ver el video](https://img.youtube.com/vi/GWDrMEiTvxc/maxresdefault.jpg)](https://www.youtube.com/watch?v=GWDrMEiTvxc)
 
+## Actividad 5. Calibración de cero y error articular
+
+Para garantizar la precisión de los movimientos del robot en las tareas posteriores, se realizó un proceso de calibración y análisis de error para cada uno de los servomotores. El procedimiento consistió en enviar cinco posiciones angulares distintas (distribuidas dentro de su rango seguro de operación) y registrar tanto la posición solicitada (deseada) como la posición real reportada por el *encoder* interno de cada motor. Con estos datos se calculó el error absoluto para cada medición. A partir de esto, se determinó el error máximo, el error promedio y el desplazamiento de cero (offset) de cada articulación, implementando vía software la corrección necesaria para mitigar dicho desfase.
+
+A continuación, se presentan las gráficas comparativas de posición para todas las articulaciones y los datos extraidos por consola:
+
+![Calibración Base](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/errores.png)
+
+![Calibración Base](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/Act5_1.png)
+![Calibración Base](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/Act5_2.png)
+![Calibración Base](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/Act5_3.png)
+![Calibración Base](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/Act5_4.png)
+
+
+
+
+
+Al observar las gráficas resultantes y analizar numéricamente los datos, se evidencia un error de estado estacionario inherente en todos los servomotores. Este comportamiento es completamente esperado en manipuladores físicos y se debe a múltiples factores propios de los actuadores (como la resolución finita de los potenciómetros/encoders internos, la zona muerta del controlador del motor para evitar oscilaciones constantes, y la holgura mecánica o *backlash* presente en las cajas reductoras).
+
+Gracias a la identificación analítica del desplazamiento de cero (offset) para cada eslabón, fue posible aplicar una compensación directa en el nodo de control. Esta corrección de software resulta ser un paso fundamental, ya que garantiza que el "cero" lógico del programa coincida con el "cero" físico real del manipulador, mejorando drásticamente la exactitud posicional requerida para el posterior cálculo de la cinemática directa e inversa.
+
 ## Actividad 6. Determinación de límites seguros
 
 Para garantizar la integridad física del manipulador, se determinaron experimentalmente los límites de operación para cada una de las articulaciones. Desde la posició de home, se realizó un barrido para cada articulación, de modo que el manipulador nunca sufriera choques o colisiones tanto con él mismo como con su entorno. A partir de las pruebas manuales y visuales, se establecieron los siguientes límites (todos expresados en grados). Además, se definió un margen de seguridad constante de 3° antes del límite físico real, pues es un margen aceptable que permite trabajar ampliamente con el manipulador.
@@ -202,7 +223,7 @@ Al analizar el comportamiento físico del manipulador y los datos graficados, se
 
 ## Actividad 11. Cinemática directa
 
-Para esta actividad, se obtuvieron los parámetros de Denavit-Hartenberg (DH) del manipulador, elaborando el diagrama con la guía de 9 pasos vista en clase
+Para esta actividad, se obtuvieron los parámetros de Denavit-Hartenberg (DH) del manipulador, elaborando el diagrama con la guía de 9 pasos vista en clase:
 
 1) Enumerar articulaciones
 2) Enumerar eslabones
@@ -223,7 +244,7 @@ La tabla de parámetros Denavit-Hartenberg se presenta a continuación:
 | 1 | q_1 | l_1 | 0 | -90° |
 | 2 | q_2 - 90° | 0 | l_2 | 0 |
 | 3 | q_3 | 0 | l_3 | 0 |
-| 4 | q4 + 90° | 0 | 0 | 90° |
+| 4 | q_4 + 90° | 0 | 0 | 90° |
 | 5 | 0 | l_4 | 0 | 0 |
 
 > **Nota:** la fila i = 5 fue agregada con el objetivo de tener una matríz de transformación homogénea que nos permita llegar efectivamente al efector final, pues sin esta, el punto final se encontraría en la articulación de la muñeca.
