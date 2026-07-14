@@ -103,13 +103,9 @@ A continuación, se presentan las gráficas comparativas de posición para todas
 ![Calibración Base](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/Act5_3.png)
 ![Calibración Base](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/Act5_4.png)
 
+Al observar las gráficas resultantes y analizar numéricamente los datos, se evidencia un error bajo e inherente en todos los servomotores. Este comportamiento es completamente esperado y se debe a múltiples factores propios de los actuadores (como la resolución finita de los encoders internos, las pequeñas oscilaciones que pueden presentarse durante la medición, y la holgura mecánica o "juego" presente en las cajas reductoras). Además, se observó que el mayor error está presente en la articulación del hombro "shoulder", la cual es, especificamente, la más expuesta a componentes de masa e inerciales.
 
-
-
-
-Al observar las gráficas resultantes y analizar numéricamente los datos, se evidencia un error de estado estacionario inherente en todos los servomotores. Este comportamiento es completamente esperado en manipuladores físicos y se debe a múltiples factores propios de los actuadores (como la resolución finita de los potenciómetros/encoders internos, la zona muerta del controlador del motor para evitar oscilaciones constantes, y la holgura mecánica o *backlash* presente en las cajas reductoras).
-
-Gracias a la identificación analítica del desplazamiento de cero (offset) para cada eslabón, fue posible aplicar una compensación directa en el nodo de control. Esta corrección de software resulta ser un paso fundamental, ya que garantiza que el "cero" lógico del programa coincida con el "cero" físico real del manipulador, mejorando drásticamente la exactitud posicional requerida para el posterior cálculo de la cinemática directa e inversa.
+Finalmente, fue posible aplicar una compensación directa en el nodo de control. Esta corrección de software resulta ser un paso fundamental, ya que garantiza que el "cero" lógico del programa coincida con el "cero" físico real del manipulador, mejorando drásticamente la exactitud posicional requerida para el posterior cálculo de la cinemática directa e inversa.
 
 ## Actividad 6. Determinación de límites seguros
 
