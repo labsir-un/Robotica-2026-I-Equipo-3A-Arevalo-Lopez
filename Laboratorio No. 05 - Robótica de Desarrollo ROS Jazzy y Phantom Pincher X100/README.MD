@@ -203,7 +203,7 @@ Para esta sección, se desarrolló un nodo que habilita un modo de "enseñanza" 
 
 [Código del ejercicio](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/ensenanza.py)
 
-### Evidencia en Video
+[![Video del ejercicio](https://img.youtube.com/vi/4CZ2Z-obUDc/maxresdefault.jpg)](https://www.youtube.com/watch?v=4CZ2Z-obUDc)
 
 ## Actividad 14. Trazado de una figura
 
