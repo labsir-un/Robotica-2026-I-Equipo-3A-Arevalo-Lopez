@@ -200,6 +200,37 @@ A continuación, se presentan las gráficas y los indicadores que contrastan la 
 
 Al analizar el comportamiento físico del manipulador y los datos graficados, se evidenció una relación directa entre la frecuencia de la trayectoria y la magnitud del error de seguimiento. Se pudo notar que los errores son significativamente más grandes cuando la frecuencia del movimiento es más alta y cuando se aumenta la amplitud. Esto se debe a que una mayor frecuencia exige una mayor velocidad y aceleración instantánea en la articulación del codo para poder completar el ciclo en menos tiempo. De manera equivalente, si se aumenta la amplitud, el manipulador debe recorrer mayor distancia en el mismo tiempo. Al someter al servomotor a esta alta demanda, las limitaciones mecánicas y de control del sistema se hacen evidentes, impidiendo que el motor alcance la posición a tiempo. Como consecuencia, se genera un desfase o "lag" evidente, resultando en una mayor diferencia entre la posición calculada teóricamente y la posición real que el sensor logra medir en ese instante de tiempo.
 
+## Actividad 12. Cinemática inversa
+
+La cinemática inversa permite determinar la configuración articular (los ángulos de cada motor) necesaria para que el efector final del manipulador alcance una posición espacial específica, definida por sus coordenadas cartesianas (x, y, z). Para dar solución a este problema, en primera instancia se realizó el planteamiento geométrica. Esto permitió plantear las ecuaciones necesarias para hallar las múltiples soluciones posibles, incluyendo las configuraciones de codo arriba y codo abajo.
+
+A continuación, se adjunta la evidencia del desarrollo:
+
+![Procedimiento matemático 1](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/CinematicaInversa1.jpg)
+
+![Procedimiento matemático 2](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/CinematicaInversa2.jpg)
+
+![Procedimiento matemático 2](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/CinematicaInversa3.jpg)
+
+### Implementación en ROS 2
+
+Posteriormente, las ecuaciones deducidas analíticamente se implementaron computacionalmente mediante una función en Python. Este algoritmo no solo calcula los ángulos requeridos, sino que incluye una lógica de validación robusta que cumple con los siguientes requisitos:
+
+1. Calcula todas las soluciones articulares posibles para el punto $(x, y, z)$ ingresado.
+2. Identifica y clasifica si las configuraciones resultantes corresponden a posturas de *codo arriba* o *codo abajo*.
+3. Filtra y descarta automáticamente aquellas soluciones matemáticas que incumplan los límites físicos de seguridad de los servomotores (establecidos en la Actividad 6).
+4. Genera una alerta informativa en caso de que el punto espacial solicitado se encuentre fuera del espacio de trabajo del robot (punto inalcanzable).
+5. Selecciona y ejecuta de manera autónoma la solución válida que requiera el menor desplazamiento articular respecto a la postura actual del manipulador.
+
+Para comprobar la fiabilidad del algoritmo, el sistema fue probado exitosamente guiando al robot hacia cinco posiciones cartesianas diferentes dentro de su espacio de trabajo.
+
+```python
+# =============================================================================
+# LABORATORIO 5 - ACTIVIDAD 12: CINEMÁTICA INVERSA
+# =============================================================================
+
+# [PEGA AQUÍ TU CÓDIGO DE PYTHON PARA LA CINEMÁTICA INVERSA]
+
 ## Actividad 13. Enseñanza y repetición de poses
 
 Para esta sección, se desarrolló un nodo que habilita un modo de "enseñanza" en el robot. Este programa permite mover el manipulador manualmente o por comandos hacia posiciones específicas, guardar la configuración articular actual, y asignarle un nombre identificador. En total se registraron y almacenaron ocho poses diferentes. Para garantizar la persistencia de los datos, estas posturas fueron guardadas en un archivo de configuración .yaml. Finalmente, la rutina de repetición lee este archivo y reproduce las poses en el orden registrado.
