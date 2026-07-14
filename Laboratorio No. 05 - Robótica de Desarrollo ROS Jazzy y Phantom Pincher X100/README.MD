@@ -88,8 +88,7 @@ Para comprobar el correcto funcionamiento del control y la respuesta física del
 
 Los ángulos proporcionados para cada articulación se muestran en el video adjunto.
 
-### Evidencia en Video
-
+[![Ver el video](https://img.youtube.com/vi/GWDrMEiTvxc/maxresdefault.jpg)](https://www.youtube.com/watch?v=GWDrMEiTvxc)
 
 ## Actividad 6. Determinación de límites seguros
 
