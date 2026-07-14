@@ -205,7 +205,7 @@ Para esta sección, se desarrolló un nodo que habilita un modo de "enseñanza" 
 
 Video del ejercicio:
 
-[[Ver video](https://img.youtube.com/vi/4CZ2Z-obUDc/maxresdefault.jpg)](https://www.youtube.com/watch?v=4CZ2Z-obUDc)
+[![Ver video](https://img.youtube.com/vi/4CZ2Z-obUDc/maxresdefault.jpg)](https://www.youtube.com/watch?v=4CZ2Z-obUDc)
 
 ## Actividad 14. Trazado de una figura
 
