@@ -200,6 +200,49 @@ A continuación, se presentan las gráficas y los indicadores que contrastan la 
 
 Al analizar el comportamiento físico del manipulador y los datos graficados, se evidenció una relación directa entre la frecuencia de la trayectoria y la magnitud del error de seguimiento. Se pudo notar que los errores son significativamente más grandes cuando la frecuencia del movimiento es más alta y cuando se aumenta la amplitud. Esto se debe a que una mayor frecuencia exige una mayor velocidad y aceleración instantánea en la articulación del codo para poder completar el ciclo en menos tiempo. De manera equivalente, si se aumenta la amplitud, el manipulador debe recorrer mayor distancia en el mismo tiempo. Al someter al servomotor a esta alta demanda, las limitaciones mecánicas y de control del sistema se hacen evidentes, impidiendo que el motor alcance la posición a tiempo. Como consecuencia, se genera un desfase o "lag" evidente, resultando en una mayor diferencia entre la posición calculada teóricamente y la posición real que el sensor logra medir en ese instante de tiempo.
 
+## Actividad 11. Cinemática directa
+
+Para esta actividad, se obtuvieron los parámetros de Denavit-Hartenberg (DH) del manipulador, elaborando el diagrama con la guía de 9 pasos vista en clase
+
+1) Enumerar articulaciones
+2) Enumerar eslabones
+3) Enumerar ejes (J_i)
+4) Definir normales comunes (n_i)
+5) Definir ejes (z_i)
+6) Definir orígenes (O_i)
+7) Definir ejes (x_i)
+8) Definir ejes (y_i)
+9) Extraer parámetros DH
+
+![image](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/diagrama.png)
+
+La tabla de parámetros Denavit-Hartenberg se presenta a continuación: 
+
+| i | θ_i | d_i | a_i | α_i |
+| :--- | :---: | :---: | :---: | :---: |
+| 1 | q_1 | l_1 | 0 | -90° |
+| 2 | q_2 - 90° | 0 | l_2 | 0 |
+| 3 | q_3 | 0 | l_3 | 0 |
+| 4 | q4 + 90° | 0 | 0 | 90° |
+| 5 | 0 | l_4 | 0 | 0 |
+
+> **Nota:** la fila i = 5 fue agregada con el objetivo de tener una matríz de transformación homogénea que nos permita llegar efectivamente al efector final, pues sin esta, el punto final se encontraría en la articulación de la muñeca.
+
+El programa que posteriormente se desarrolló está diseñado para recibir los cuatro valores articulares del brazo (q_1, q_2, q_3, q_4) y, a partir de ellos, calcular las coordenadas cartesianas y la orientación de la herramienta (x, y, z, roll, pitch, yaw).
+
+[Código del ejercicio](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/directa.py)
+
+Para comprobar el funcionamiento del algoritmo, se evaluó la cinemática directa utilizando cinco configuraciones articulares, comparando los resultados calculados matemáticamente con la posición y orientación observadas gráficamente en la simulación de RViz.
+
+![Directa 1](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/Dir1.png)
+![Directa 2](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/Dir2.png)
+![Directa 3](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/Dir3.png)
+![Directa 4](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/Dir4.png)
+![Directa 5](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/Dir5.png)
+
+Durante esta comparación empírica, se observó una ligera discrepancia entre el modelo matemático/simulado y el comportamiento del robot real. Esta diferencia tiene su origen en que el modelado tridimensional (los archivos .stl) del eslabón que conecta la articulación del hombro con la del codo presenta dimensiones ligeramente diferentes a la estructura física ensamblada en nuestro manipulador.A nivel práctico, este desfase se traduce en un error de posición en el efector final de apenas unos pocos milímetros. Para aplicaciones generales de desplazamiento o ejecución de coreografías, esta pequeña diferencia no afecta de manera evidente el rendimiento ni la apreciación del movimiento. Sin embargo, es fundamental destacar que si se deseara utilizar este brazo para aplicaciones industriales de alta precisión en el espacio cartesiano (como tareas finas de pick and place o ensamblaje), sí sería necesario revisar el modelado del eslabón con mayor detenimiento y calibrar el modelo cinemático para mitigar esta discrepancia física.
+
+
 ## Actividad 12. Cinemática inversa
 
 La cinemática inversa permite determinar la configuración articular (los ángulos de cada motor) necesaria para que el efector final del manipulador alcance una posición espacial específica, definida por sus coordenadas cartesianas (x, y, z). Para dar solución a este problema, en primera instancia se realizó el planteamiento geométrica. Esto permitió plantear las ecuaciones necesarias para hallar las múltiples soluciones posibles, incluyendo las configuraciones de codo arriba y codo abajo.
@@ -210,7 +253,7 @@ A continuación, se adjunta la evidencia del desarrollo:
 
 ![Procedimiento matemático 2](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/CinematicaInversa2.jpg)
 
-![Procedimiento matemático 2](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/CinematicaInversa3.jpg)
+![Procedimiento matemático 3](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/CinematicaInversa3.jpg)
 
 Posteriormente, las ecuaciones obtenidas se implementaron en el código del ejercicio. El algoritmo resultante no solo calcula los ángulos requeridos, sino que incluye una lógica de validación que cumple con los siguientes requisitos:
 
