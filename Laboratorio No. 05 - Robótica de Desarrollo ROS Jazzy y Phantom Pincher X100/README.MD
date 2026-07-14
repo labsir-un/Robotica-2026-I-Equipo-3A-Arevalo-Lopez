@@ -116,7 +116,7 @@ A diferencia de la actividad anterior, se desarrolló un script para alcanzar la
 
 [Código del ejercicio](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/secuencial.py)
 
-### Evidencia en Video
+[![Ver el video](https://img.youtube.com/vi/H-eo34o0XAY/maxresdefault.jpg)](https://www.youtube.com/watch?v=H-eo34o0XAY)
 
 Comparativamente, podemos mencionar que:
 
@@ -212,11 +212,9 @@ Con el fin de validar la cinemática inversa del manipulador, se procedió a rea
 
 [Código del ejercicio](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/circuloinversa.py)
 
-Video del ejercicio
+Video del ejercicio:
 
 [![Ver el video](https://img.youtube.com/vi/647Dq322C7E/maxresdefault.jpg)](https://www.youtube.com/watch?v=647Dq322C7E)
-
-647Dq322C7E
 
 El comportamiento presentado en la prueba física es el esperado en cuanto a la determinación de las configuraciones articulares: el trazado del circulo es fácil de apreciar e identificar. Sin embargo, el movimiento no se nota tan fluido, lo que puede deberse principalemente a componentes inerciales al mover el manipulador o a la cantidad de puntos que coponían la circunferencia.
 
