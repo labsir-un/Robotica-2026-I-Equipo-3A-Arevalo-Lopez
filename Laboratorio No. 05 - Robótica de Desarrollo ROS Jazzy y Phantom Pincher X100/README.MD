@@ -27,11 +27,11 @@ Para dar inicio a las pruebas experimentales, se llevó a cabo el protocolo de i
 
 4. Validación en entorno virtual: Como paso final de comprobación, se verificó que el estado y la posición del modelo tridimensional visualizado en la herramienta RViz correspondiera correctamente con la postura física actual del manipulador.
 
-**ACLARACIÓN*************************
-
 ![image](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/homeRVIZ.png)
 
+Hacemos la anotación de que, inicialmente, la posición de home que se visualizaba en RViz era una especie de L: el robot estaba retraido 90° en la articulación del codo. Esto no concordaba con lo que estaba ocurriendo con el robot real, pues este último se veía totalmente vertical al estar en la posición de home. Para arreglar esto, fue necesario modificar el script ...
 
+Adicionalmente, se observa una diferencia entre el modelo dispuesto en RViz y el manipulador físico: el eslabón presente entre el hombro y el codo es totalmente recto en la realidad, mientras que el modelo importado mediante el archivo stl cuenta con forma de L. Es importante tener en cuenta esta discrepancia, pues puede ser crítica en aplicaciones en donde se requiera de alta presición. Por facilidad en el ensamble y para evitar modificar modelados y/o scripts, se decidió proceder con este modelo en RViz y realizar los ejercicios posteriores teniendo en cuenta esta ligera distición.
 
 ## Actividad 2. Identificación de motores y articulaciones
 Para comprender la cinemática del robot y garantizar un control adecuado, se realizó una inspección física detallada. El objetivo fue identificar cada uno de los servomotores (todos de la referencia Dynamixel AX-12A), su ubicación exacta en la cadena cinemática, su identificador (ID) dentro de la red y el sentido de giro positivo para cada eje.
