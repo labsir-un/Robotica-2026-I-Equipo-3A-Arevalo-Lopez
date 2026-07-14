@@ -108,7 +108,9 @@ Para esta etapa del laboratorio, se programó un nodo en ROS 2 Jazzy capaz de en
 
 [Código del ejercicio](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/simultaneo.py)
 
-### Evidencia en Video
+Video del ejercicio:
+
+[![Ver el video](https://img.youtube.com/vi/H-eo34o0XAY/maxresdefault.jpg)](https://www.youtube.com/watch?v=H-eo34o0XAY)
 
 ## Actividad 8. Movimiento secuencial
 
@@ -116,7 +118,9 @@ A diferencia de la actividad anterior, se desarrolló un script para alcanzar la
 
 [Código del ejercicio](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/secuencial.py)
 
-[![Ver el video](https://img.youtube.com/vi/H-eo34o0XAY/maxresdefault.jpg)](https://www.youtube.com/watch?v=H-eo34o0XAY)
+Video del ejercicio
+
+[![Ver el video](https://img.youtube.com/vi/5a1SOcvFOQw/maxresdefault.jpg)](https://www.youtube.com/watch?v=5a1SOcvFOQw)
 
 Comparativamente, podemos mencionar que:
 
