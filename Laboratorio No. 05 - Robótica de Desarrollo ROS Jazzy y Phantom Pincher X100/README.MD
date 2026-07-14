@@ -228,7 +228,7 @@ La tabla de parámetros Denavit-Hartenberg se presenta a continuación:
 
 > **Nota:** la fila i = 5 fue agregada con el objetivo de tener una matríz de transformación homogénea que nos permita llegar efectivamente al efector final, pues sin esta, el punto final se encontraría en la articulación de la muñeca.
 
-El programa que posteriormente se desarrolló está diseñado para recibir los cuatro valores articulares del brazo (q_1, q_2, q_3, q_4) y, a partir de ellos, calcular las coordenadas cartesianas y la orientación de la herramienta (x, y, z, roll, pitch, yaw).
+El programa que posteriormente se desarrolló está diseñado para recibir los cuatro valores articulares del brazo (q_1, q_2, q_3, q_4) y, a partir de ellos, construir las matrices de transformación homogéneas y calcular las coordenadas cartesianas y la orientación de la herramienta (x, y, z, roll, pitch, yaw).
 
 [Código del ejercicio](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/directa.py)
 
@@ -240,8 +240,7 @@ Para comprobar el funcionamiento del algoritmo, se evaluó la cinemática direct
 ![Directa 4](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/Dir4.png)
 ![Directa 5](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/Dir5.png)
 
-Durante esta comparación empírica, se observó una ligera discrepancia entre el modelo matemático/simulado y el comportamiento del robot real. Esta diferencia tiene su origen en que el modelado tridimensional (los archivos .stl) del eslabón que conecta la articulación del hombro con la del codo presenta dimensiones ligeramente diferentes a la estructura física ensamblada en nuestro manipulador.A nivel práctico, este desfase se traduce en un error de posición en el efector final de apenas unos pocos milímetros. Para aplicaciones generales de desplazamiento o ejecución de coreografías, esta pequeña diferencia no afecta de manera evidente el rendimiento ni la apreciación del movimiento. Sin embargo, es fundamental destacar que si se deseara utilizar este brazo para aplicaciones industriales de alta precisión en el espacio cartesiano (como tareas finas de pick and place o ensamblaje), sí sería necesario revisar el modelado del eslabón con mayor detenimiento y calibrar el modelo cinemático para mitigar esta discrepancia física.
-
+Durante esta comparación, se observó una ligera discrepancia entre el modelo matemático (el código desarrollado), el simulado en RViz y el comportamiento del robot real. Esta diferencia tiene su origen en que el modelado tridimensional (los archivos .stl) del eslabón que conecta la articulación del hombro con la del codo presenta dimensiones ligeramente diferentes a la estructura física en nuestro manipulador. A nivel práctico, este desfase se traduce en un error de posición en el efector final de apenas unos pocos milímetros. Para aplicaciones generales de desplazamiento o ejecución de coreografías, esta pequeña diferencia no afecta de manera significativa el rendimiento ni la apreciación del movimiento. Sin embargo, es importante mencionar que si se deseara utilizar este brazo para aplicaciones industriales de alta precisión (como tareas finas de pick and place descritas en el proyecto), sí sería necesario revisar el modelado del eslabón con mayor detenimiento y calibrar el modelo cinemático para mitigar esta discrepancia física.
 
 ## Actividad 12. Cinemática inversa
 
