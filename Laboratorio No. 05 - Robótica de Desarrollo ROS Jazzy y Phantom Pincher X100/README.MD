@@ -212,24 +212,15 @@ A continuación, se adjunta la evidencia del desarrollo:
 
 ![Procedimiento matemático 2](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/CinematicaInversa3.jpg)
 
-### Implementación en ROS 2
+Posteriormente, las ecuaciones obtenidas se implementaron en el código del ejercicio. El algoritmo resultante no solo calcula los ángulos requeridos, sino que incluye una lógica de validación que cumple con los siguientes requisitos:
 
-Posteriormente, las ecuaciones deducidas analíticamente se implementaron computacionalmente mediante una función en Python. Este algoritmo no solo calcula los ángulos requeridos, sino que incluye una lógica de validación robusta que cumple con los siguientes requisitos:
-
-1. Calcula todas las soluciones articulares posibles para el punto $(x, y, z)$ ingresado.
+1. Calcula todas las soluciones articulares posibles para la configuración del efector final (x, y, z, θ) ingresada inicialmente.
 2. Identifica y clasifica si las configuraciones resultantes corresponden a posturas de *codo arriba* o *codo abajo*.
 3. Filtra y descarta automáticamente aquellas soluciones matemáticas que incumplan los límites físicos de seguridad de los servomotores (establecidos en la Actividad 6).
-4. Genera una alerta informativa en caso de que el punto espacial solicitado se encuentre fuera del espacio de trabajo del robot (punto inalcanzable).
-5. Selecciona y ejecuta de manera autónoma la solución válida que requiera el menor desplazamiento articular respecto a la postura actual del manipulador.
+4. Genera una alerta informativa en caso de que el punto espacial solicitado se encuentre fuera del espacio de trabajo del robot.
+5. Selecciona y ejecuta de manera autónoma la solución válida elegida.
 
-Para comprobar la fiabilidad del algoritmo, el sistema fue probado exitosamente guiando al robot hacia cinco posiciones cartesianas diferentes dentro de su espacio de trabajo.
-
-```python
-# =============================================================================
-# LABORATORIO 5 - ACTIVIDAD 12: CINEMÁTICA INVERSA
-# =============================================================================
-
-# [PEGA AQUÍ TU CÓDIGO DE PYTHON PARA LA CINEMÁTICA INVERSA]
+[Código del ejercicio](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/inversa.py)
 
 ## Actividad 13. Enseñanza y repetición de poses
 
