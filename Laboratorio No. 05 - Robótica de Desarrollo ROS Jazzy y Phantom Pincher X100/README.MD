@@ -94,6 +94,9 @@ Los ángulos proporcionados para cada articulación se muestran en el video adju
 
 Para garantizar la precisión de los movimientos del robot en las tareas posteriores, se realizó un proceso de calibración y análisis de error para cada uno de los servomotores. El procedimiento consistió en enviar cinco posiciones angulares distintas (distribuidas dentro de su rango seguro de operación) y registrar tanto la posición solicitada (deseada) como la posición real reportada por el *encoder* interno de cada motor. Con estos datos se calculó el error absoluto para cada medición. A partir de esto, se determinó el error máximo, el error promedio y el desplazamiento de cero (offset) de cada articulación, implementando vía software la corrección necesaria para mitigar dicho desfase.
 
+[Código del ejercicio](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/cero.py)
+
+
 A continuación, se presentan las gráficas comparativas de posición para todas las articulaciones y los datos extraidos por consola:
 
 ![Calibración Base](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/errores.png)
