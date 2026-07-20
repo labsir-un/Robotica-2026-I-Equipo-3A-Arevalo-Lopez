@@ -673,12 +673,25 @@ flowchart TD
 
 ```
 
-### Evidencia en Video
+Video de la actividad
 
 
 Se evidenció un comportamiento fluido en su mayoría. La mayor parte de las inconsistencias en el movimiento se deben a efectos inerciales, por ejemplo, cuando el hombro tiene una configuración articular cercana a 90° o -90° y el brazo está totalmente estirado.
 
+## Conclusiones
+
+- La alineación precisa entre el modelo virtual en RViz y el robot real —ajustando poses y sentidos de giro— resulta indispensable para prevenir colisiones y garantizar un control seguro. Relacionado a esto y, como aspecto a mejorar, se desea implementar el modelado correcto de los eslabones en los archivos stl, pues esto limita de manera directa la precisión en la manipulación del robot.
+
+- Calibración y Compensación de Errores: Ajustar los offsets por software es clave para corregir el juego mecánico y la carga inercial (más crítica en el hombro), asegurando la mayor presición posible con las herramientas que se disponía en este laboratorio.
+
+- El movimiento coordinado entre articulaciones es más rápido en movimienteo combinados (varios motores moviendose en simultaneo). Este movimiento simultaneo resulta más fluido y natural para el desplazamiento del efector final, a diferencia del modo secuencial que eleva el tiempo de ciclo e induce vibraciones.
+
+- Los perfiles cúbicos superan a los lineales al evitar cambios bruscos de aceleración, reduciendo significativamente el error de seguimiento, por lo menos al inicio y final de cada trayectoria.
+
+- El seguimiento de señales senoidales evidenció que a mayor frecuencia o amplitud, mayor es el desfase, demostrando las limitaciones físicas de velocidad y par de los servomotores AX-12A.
+
 ## Referencias
 
+- LABSIR UN. (s. f.). labsir-un [Organización de GitHub]. GitHub. Recuperado el 19 de julio de 2026, de https://github.com/labsir-un
 
 
