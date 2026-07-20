@@ -36,12 +36,20 @@ Hacemos la anotación de que, inicialmente, la posición de home que se visualiz
 
 ```python
   <joint name="elbow" type="revolute">
-    <origin xyz="${Lm} ${-L2} 0.0" rpy="0.0 0.0 ${-atan2(L2,Lm) - 1.5708}"/> # se agrega la corrección de -π (o -1.5708)
+    #<origin xyz="${Lm} ${-L2} 0.0" rpy="0.0 0.0 ${-atan2(L2,Lm) - 1.5708}"/> 
+    <origin xyz="${Lm} ${-L2} 0.0" rpy="0.0 0.0 ${-atan2(L2,Lm) - 1.5708}"/> # se agrega corrección
     <parent link="link2"/>
     <child link="link3"/>
     <axis xyz="0.0 0.0 1.0"/>
     <limit lower="${-150*pi/180}" upper="${150*pi/180}" effort="4.0" velocity="2.0"/>
   </joint>
+```
+
+De manera similar, fue necesario editar el sentido de giro establecido en la simulación, pues este no correspondia con el movimiento que el robot real estaba presentando. El archivo modificado en esta ocasión fue `ros2_jazzy/phantom_ws/src/pincher_control/pincher_control/control_servo.py`, en el cual cambiamos unicamente la siguiente linea:
+
+```python
+        #self.declare_parameter('joint_signs', [1.0, -1.0, -1.0, -1.0, 1.0])
+        self.declare_parameter('joint_signs', [1.0, 1.0, 1.0, 1.0, 1.0]) #sentido de giro corregido
 ```
 
 Adicionalmente, se observa una diferencia entre el modelo dispuesto en RViz y el manipulador físico: el eslabón presente entre el hombro y el codo es totalmente recto en la realidad, mientras que el modelo importado mediante el archivo stl cuenta con forma de L. Es importante tener en cuenta esta discrepancia, pues puede ser crítica en aplicaciones en donde se requiera de alta presición. Por facilidad en el ensamble y para evitar modificar modelados y/o scripts excesivamente, se decidió proceder con este modelo en RViz y realizar los ejercicios posteriores teniendo en cuenta esta ligera distición.
