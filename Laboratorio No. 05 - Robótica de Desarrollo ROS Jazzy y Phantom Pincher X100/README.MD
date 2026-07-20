@@ -673,8 +673,9 @@ flowchart TD
 
 ```
 
-Video de la actividad
+Video del ejercicio:
 
+[![Ver el video](https://img.youtube.com/vi/647Dq322C7E/maxresdefault.jpg)](https://www.youtube.com/watch?v=fc764ZbglbgkA1iQ)
 
 Se evidenció un comportamiento fluido en su mayoría. La mayor parte de las inconsistencias en el movimiento se deben a efectos inerciales, por ejemplo, cuando el hombro tiene una configuración articular cercana a 90° o -90° y el brazo está totalmente estirado.
 
@@ -692,6 +693,5 @@ Se evidenció un comportamiento fluido en su mayoría. La mayor parte de las inc
 
 ## Referencias
 
-- LABSIR UN. (s. f.). GitHub. Recuperado el 19 de julio de 2026, de https://github.com/labsir-un
-
+- LABSIR UN. (2026). 06_Rob_2026_I_ROS2_Jazzy_PhantomX100_RVIZ [Repositorio de GitHub]. GitHub. https://github.com/labsir-un/06_Rob_2026_I_ROS2_Jazzy_PhantomX100_RVIZ
 
