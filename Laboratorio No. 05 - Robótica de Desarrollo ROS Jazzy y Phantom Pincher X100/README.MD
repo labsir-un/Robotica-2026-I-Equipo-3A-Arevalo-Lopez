@@ -106,6 +106,7 @@ El programa permite al usuario interactuar a través de la terminal para selecci
 
 [Código del ejercicio](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/individual.py)
 
+```mermaid
 flowchart TD
     A[Inicio] --> B[Inicializar ROS 2: rclpy.init]
     B --> C[Instanciar nodo ControlArticulacion]
@@ -134,6 +135,7 @@ flowchart TD
     R --> S[Publicar JointState en /pincher/command]
     S --> T[Ejecutar rclpy.spin_once]
     T --> E
+```
 
 Para comprobar el correcto funcionamiento del control y la respuesta física del manipulador, se realizaron pruebas independientes en cada articulación ejecutando al menos tres (3) posiciones angulares distintas y retornando exitosamente a la posición de referencia (0° / posición de home) tras cada movimiento.
 
@@ -147,6 +149,7 @@ Para garantizar la precisión de los movimientos del robot en las tareas posteri
 
 [Código del ejercicio](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/cero.py)
 
+```mermaid
 flowchart TD
     A[Inicio] --> B[Inicializar ROS 2: rclpy.init]
     B --> C[Instanciar nodo ControlRobot y suscriptores/publicadores]
@@ -178,7 +181,7 @@ flowchart TD
     U --> V[Mostrar gráficas: plt.show]
     V --> W[rclpy.shutdown]
     W --> X[Fin]
-
+```
 
 A continuación, se presentan las gráficas comparativas de posición para todas las articulaciones y los datos extraidos por consola:
 
@@ -211,6 +214,7 @@ Para esta etapa del laboratorio, se programó un nodo en ROS 2 Jazzy capaz de en
 
 [Código del ejercicio](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/simultaneo.py)
 
+```mermaid
 flowchart TD
     A[Inicio] --> B[Inicializar ROS 2: rclpy.init]
     B --> C[Instanciar nodo Bailarin y convertidor de límites a rad]
@@ -238,6 +242,7 @@ flowchart TD
     R --> S[Esperar 1s]
     S --> T[rclpy.shutdown]
     T --> U[Fin]
+```
 
 Video del ejercicio:
 
@@ -249,6 +254,7 @@ A diferencia de la actividad anterior, se desarrolló un script para alcanzar la
 
 [Código del ejercicio](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/secuencial.py)
 
+```mermaid
 flowchart TD
     A[Inicio] --> B[Inicializar ROS 2: rclpy.init]
     B --> C[Instanciar nodo Bailarin y suscribirse a /joint_states]
@@ -277,6 +283,7 @@ flowchart TD
     R --> S[Esperar 1s]
     S --> T[rclpy.shutdown]
     T --> U[Fin]
+```
 
 Video del ejercicio
 
@@ -294,6 +301,7 @@ En esta actividad se implementó un algoritmo de interpolación de trayectorias.
 
 [Código del ejercicio](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/interpolacion.py)
 
+```mermaid
 flowchart TD
     A[Inicio] --> B[Inicializar ROS 2: rclpy.init]
     B --> C[Instanciar nodo Interpolador y suscribirse a /joint_states]
@@ -324,6 +332,7 @@ flowchart TD
     S --> T[Mostrar gráficas: plt.show]
     T --> U[rclpy.shutdown]
     U --> V[Fin]
+```
 
 A continuación, se presentan las gráficas resultantes que ilustran la evolución de las posiciones articulares durante el movimiento interpolado:
 
@@ -370,6 +379,7 @@ Para evaluar la capacidad de respuesta dinámica del manipulador, se implementó
 
 [Código del ejercicio](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/sinusoidal.py)
 
+```mermaid
 flowchart TD
     A[Inicio] --> B[Inicializar ROS 2: rclpy.init]
     B --> C[Instanciar nodo Senoidal y suscribirse a /joint_states]
@@ -397,6 +407,7 @@ flowchart TD
     P -- Sí --> F
     P -- No --> S[Destruir nodo y rclpy.shutdown]
     S --> T[Fin]
+```
 
 A continuación, se presentan las gráficas y los indicadores que contrastan la posición calculada (deseada) contra la posición medida (real) por el actuador del codo a diferentes frecuencias:
 
@@ -451,6 +462,7 @@ El programa que posteriormente se desarrolló está diseñado para recibir los c
 
 [Código del ejercicio](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/directa.py)
 
+```mermaid
 flowchart TD
     A[Inicio] --> B[Inicializar ROS 2: rclpy.init]
     B --> C[Instanciar nodo ControlRobot]
@@ -471,6 +483,7 @@ flowchart TD
 
     P --> N[Esperar 2s, destruir nodo y rclpy.shutdown]
     N --> Q[Fin]
+```
 
 Para comprobar el funcionamiento del algoritmo, se adjuntan pantallazos en donde se evalúa la cinemática directa utilizando cinco configuraciones articulares (las cuales se muestran al principio de la consola), comparando los resultados calculados de posición y orientación del efector final con los observados gráficamente en la simulación de RViz.
 ![Directa 1](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/DIRE1.png)
@@ -503,6 +516,7 @@ Posteriormente, las ecuaciones obtenidas se implementaron en el código del ejer
 
 [Código del ejercicio](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/inversa.py)
 
+```mermaid
 flowchart TD
     A[Inicio] --> B[Inicializar ROS 2: rclpy.init]
     B --> C[Instanciar nodo ControlRobot]
@@ -527,6 +541,7 @@ flowchart TD
     P --> Q[Esperar 0.5s] --> N
 
     N[rclpy.shutdown] --> R[Fin]
+```
 
 ![Procedimiento matemático 3](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/inv6.png)
 ![Procedimiento matemático 3](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/inversa2.png)
@@ -542,6 +557,7 @@ Para esta sección, se desarrolló un nodo que habilita un modo de "enseñanza" 
 
 [Código del ejercicio](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/ensenanza.py)
 
+```mermaid
 flowchart TD
     A[Inicio] --> B[Inicializar ROS 2: rclpy.init]
     B --> C[Instanciar nodo Teacher / MODO ENSEÑANZA]
@@ -577,6 +593,7 @@ flowchart TD
 
     E -- "0: Salir" --> L[Destruir nodo y rclpy.shutdown]
     L --> M[Fin]
+```
 
 Video del ejercicio:
 
@@ -587,6 +604,35 @@ Video del ejercicio:
 Con el fin de validar la cinemática inversa del manipulador, se procedió a realizar el trazado de un circulo en el aire. Para lograr esto, la trayectoria geométrica no se programó enviando ángulos directamente a los motores, sino que se definió mediante una lista de coordenadas de puntos cartesianos (x, y, z) en el espacio de trabajo. Se definió que el manipulador trazaría una circunferencia, estableciendo la ubicación del centro, el radio y el plano z constante en donde se realizaría dicho trazo. Posteriormente, el algoritmo resuelve la cinemática inversa para cada uno de estos puntos, calculando y enviando los ángulos articulares exactos que el robot requiere para mover el efector final y dibujar la figura de manera continua.
 
 [Código del ejercicio](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/circuloinversa.py)
+
+```mermaid
+flowchart TD
+    A[Inicio] --> B[Inicializar ROS 2: rclpy.init]
+    B --> C[Instanciar nodo ControlRobot y configurar velocidad = 20]
+    C --> D[Mover robot a posición HOME inicial y esperar 2.5s]
+
+    D --> E["Definir parámetros del círculo:\nR = 45mm, Cx = 104mm, Cy = 0mm\nZ = 156mm, θ = 180°, N = 100 puntos"]
+    
+    E --> F["Inicializar bandera: primer = 1\nIterar i desde 0 hasta N"]
+
+    F --> G["Calcular ángulo del punto i:\nPx = Cx + R*cos(θ)\nPy = Cy + R*sin(θ)"]
+    G --> H["Calcular Cinemática Inversa silenciosa\n(verbose = False)"]
+
+    H --> I{"¿Solución válida y dentro de límites?"}
+    I -- No --> J[Mostrar alerta: Punto no alcanzable] --> O
+    I -- Sí --> K[Convertir q a grados y enviar con robot.mover]
+
+    K --> L{"¿primer == 1?"}
+    L -- Sí --> M1["Esperar 10s (alcanzar inicio)\ny cambiar primer = 0"] --> O
+    L -- No --> M2[Esperar 0.15s] --> O
+
+    O --> P{¿Quedan puntos por procesar?}
+    P -- Sí (Siguiente i) --> G
+    P -- No --> Q[Mover robot a posición HOME final y esperar 2.5s]
+
+    Q --> R[rclpy.shutdown]
+    R --> S[Fin]
+```
 
 Video del ejercicio:
 
@@ -600,6 +646,7 @@ Como cierre del laboratorio, se integraron los conceptos de control de movimient
 
 [Código del ejercicio](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/baile.py)
 
+```mermaid
 flowchart TD
     A[Inicio] --> B[Inicializar ROS 2: rclpy.init]
     B --> C["Instanciar nodo Bailarin\n(Convertir límites articulares a radianes)"]
@@ -629,6 +676,7 @@ flowchart TD
         M2 -- No --> M3[Mostrar error y cancelar movimiento]
         M2 -- Sí --> M4[Publicar JointState en /pincher/command]
     end
+```
 
 ### Evidencia en Video
 
