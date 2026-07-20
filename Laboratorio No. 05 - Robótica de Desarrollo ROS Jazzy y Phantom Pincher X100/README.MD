@@ -671,11 +671,6 @@ flowchart TD
     J --> K[rclpy.shutdown]
     K --> L[Fin]
 
-    subgraph Validación Interna: método mover
-        M1[Recibir pose articular] --> M2{¿Todas las articulaciones\ndentro de límites?}
-        M2 -- No --> M3[Mostrar error y cancelar movimiento]
-        M2 -- Sí --> M4[Publicar JointState en /pincher/command]
-    end
 ```
 
 ### Evidencia en Video
