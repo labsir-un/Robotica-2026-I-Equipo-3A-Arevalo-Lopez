@@ -29,7 +29,7 @@ Para dar inicio a las pruebas experimentales, se llevó a cabo el protocolo de i
 
 ![image](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/homeRVIZ.png)
 
-Hacemos la anotación de que, inicialmente, la posición de home que se visualizaba en RViz era una especie de L: el robot estaba retraido 90° en la articulación del codo. Esto no concordaba con lo que estaba ocurriendo con el robot real, pues este último se veía totalmente vertical al estar en la posición de home. Para arreglar esto, fue necesario modificar el script 'ros2_jazzy/phantom_ws/src/pincher_description/urdf/robot.xacro', más específicamente la sección de definición de la configuración de la articulación del codo o 'elbow':
+Hacemos la anotación de que, inicialmente, la posición de home que se visualizaba en RViz era una especie de L: el robot estaba retraido 90° en la articulación del codo. Esto no concordaba con lo que estaba ocurriendo con el robot real, pues este último se veía totalmente vertical al estar en la posición de home. Para arreglar esto, fue necesario modificar el script `ros2_jazzy/phantom_ws/src/pincher_description/urdf/robot.xacro`, más específicamente la sección de definición de la configuración de la articulación del codo o 'elbow':
 
 ```python
   <joint name="elbow" type="revolute">
