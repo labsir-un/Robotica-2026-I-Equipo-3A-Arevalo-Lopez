@@ -32,7 +32,17 @@ Para dar inicio a las pruebas experimentales, se llevó a cabo el protocolo de i
 
 ![image](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/homeRVIZ.png)
 
-Hacemos la anotación de que, inicialmente, la posición de home que se visualizaba en RViz era una especie de L: el robot estaba retraido 90° en la articulación del codo. Esto no concordaba con lo que estaba ocurriendo con el robot real, pues este último se veía totalmente vertical al estar en la posición de home. Para arreglar esto, fue necesario modificar el script ...
+Hacemos la anotación de que, inicialmente, la posición de home que se visualizaba en RViz era una especie de L: el robot estaba retraido 90° en la articulación del codo. Esto no concordaba con lo que estaba ocurriendo con el robot real, pues este último se veía totalmente vertical al estar en la posición de home. Para arreglar esto, fue necesario modificar el script `ros2_jazzy/phantom_ws/src/pincher_description/urdf/robot.xacro`, más específicamente la sección de definición de la configuración de la articulación del codo o 'elbow':
+
+```python
+  <joint name="elbow" type="revolute">
+    <origin xyz="${Lm} ${-L2} 0.0" rpy="0.0 0.0 ${-atan2(L2,Lm) - 1.5708}"/> # se agrega la corrección de -π (o -1.5708)
+    <parent link="link2"/>
+    <child link="link3"/>
+    <axis xyz="0.0 0.0 1.0"/>
+    <limit lower="${-150*pi/180}" upper="${150*pi/180}" effort="4.0" velocity="2.0"/>
+  </joint>
+```
 
 Adicionalmente, se observa una diferencia entre el modelo dispuesto en RViz y el manipulador físico: el eslabón presente entre el hombro y el codo es totalmente recto en la realidad, mientras que el modelo importado mediante el archivo stl cuenta con forma de L. Es importante tener en cuenta esta discrepancia, pues puede ser crítica en aplicaciones en donde se requiera de alta presición. Por facilidad en el ensamble y para evitar modificar modelados y/o scripts excesivamente, se decidió proceder con este modelo en RViz y realizar los ejercicios posteriores teniendo en cuenta esta ligera distición.
 
