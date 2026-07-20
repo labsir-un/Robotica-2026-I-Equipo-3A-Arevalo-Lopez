@@ -272,8 +272,8 @@ flowchart TD
     J -- Sí --> L[Publicar JointState en /pincher/command]
 
     L --> M[Verificar llego_a_pose]
-    M --> N{¿Alcanzó objetivo?\n|qd - qm| <= 2°}
-    N -- No --> O[rclpy.spin_once\nActualizar q_medida vía callback] --> M
+    M --> N{¿Alcanzó objetivo? |qd - qm| <= 2°}
+    N -- No --> O[rclpy.spin_once Actualizar q_medida vía callback] --> M
 
     N -- Sí --> P{¿Quedan poses en la rutina?}
     P -- Sí --> I
@@ -310,7 +310,7 @@ flowchart TD
     D --> E[Mover a posición HOME]
     E --> F[Esperar 5s]
 
-    F --> G["Calcular trayectoria lineal\n(s = t / T)"]
+    F --> G["Calcular trayectoria lineal (s = t / T)"]
     G --> H[Ejecutar y registrar trayectoria lineal\n(dt = 0.05s)]
 
     H --> I[Iterar por cada pose de la trayectoria]
@@ -322,7 +322,7 @@ flowchart TD
 
     M -- No --> N[Regresar a HOME y esperar 5s]
 
-    N --> O["Calcular trayectoria cúbica\n(s = 3s² - 2s³)"]
+    N --> O["Calcular trayectoria cúbica (s = 3s² - 2s³)"]
     O --> P[Ejecutar y registrar trayectoria cúbica\n(dt = 0.05s)]
 
     P --> Q[Regresar a HOME y esperar 5s]
