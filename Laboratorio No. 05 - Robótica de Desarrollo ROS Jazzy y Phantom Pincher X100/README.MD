@@ -16,6 +16,7 @@ Facultad de Ingeniería – Sede Bogotá
 
 El presente repositorio documenta el desarrollo del Laboratorio No. 05 de la asignatura de Robótica, cuyo propósito principal es controlar las articulaciones del manipulador Phantom X Pincher X100 utilizando el entorno de ROS 2 Jazzy. A través de este proyecto, se implementan soluciones, abarcando desde la medición del manipulador, hasta la aplicación de cinemática directa e inversa. Asimismo, se exploran diferentes tipos de control de movimiento (individual, simultáneo, secuencial e interpolado), culminando con la programación de trayectorias, la repetición de poses y la ejecución de rutinas complejas o tareas artísticas.
 
+Para contextualizar el entorno físico donde se ejecutan estas implementaciones y asegurar un desarrollo seguro de las trayectorias programadas, se presenta a continuación el plano de planta del laboratorio. En este esquema se delimita la ubicación del manipulador, las áreas de trabajo de los operadores y las zonas de seguridad requeridas para la operación del Phantom X Pincher:
 
 ![image](files/Planta.jpeg)
 
