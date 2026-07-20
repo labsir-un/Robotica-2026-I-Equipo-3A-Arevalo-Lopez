@@ -692,6 +692,6 @@ Se evidenció un comportamiento fluido en su mayoría. La mayor parte de las inc
 
 ## Referencias
 
-- LABSIR UN. (s. f.). labsir-un [Organización de GitHub]. GitHub. Recuperado el 19 de julio de 2026, de https://github.com/labsir-un
+- LABSIR UN. (s. f.). GitHub. Recuperado el 19 de julio de 2026, de https://github.com/labsir-un
 
 
