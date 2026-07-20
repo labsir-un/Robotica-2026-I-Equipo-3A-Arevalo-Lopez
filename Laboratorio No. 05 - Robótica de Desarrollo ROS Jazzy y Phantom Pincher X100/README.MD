@@ -106,6 +106,35 @@ El programa permite al usuario interactuar a través de la terminal para selecci
 
 [Código del ejercicio](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/individual.py)
 
+flowchart TD
+    A[Inicio] --> B[Inicializar ROS 2: rclpy.init]
+    B --> C[Instanciar nodo ControlArticulacion]
+    C --> D[Esperar 1s y publicar velocidad = 100]
+
+    D --> E[Mostrar menú de selección]
+    E --> F[/Leer opción del usuario/]
+
+    F --> G{¿Opción == '0'?}
+    G -- Sí --> N[Destruir nodo y rclpy.shutdown]
+    N --> O[Fin]
+
+    G -- No --> H{¿Opción en '1'..'5'?}
+    H -- No --> I[Mostrar 'Opción inválida'] --> E
+
+    H -- Sí --> J[Obtener límites de la articulación]
+    J --> K[/Leer ángulo en grados/]
+
+    K --> L{¿Entrada es numérica?}
+    L -- No --> M[Mostrar 'Debe ingresar un número'] --> E
+
+    L -- Sí --> P{¿Ángulo dentro de límites?}
+    P -- No --> Q[Mostrar 'ERROR: fuera de límites'] --> E
+
+    P -- Sí --> R[Calcular rad + offset en pose_actual]
+    R --> S[Publicar JointState en /pincher/command]
+    S --> T[Ejecutar rclpy.spin_once]
+    T --> E
+
 Para comprobar el correcto funcionamiento del control y la respuesta física del manipulador, se realizaron pruebas independientes en cada articulación ejecutando al menos tres (3) posiciones angulares distintas y retornando exitosamente a la posición de referencia (0° / posición de home) tras cada movimiento.
 
 Los ángulos proporcionados para cada articulación se muestran en el video adjunto.
@@ -117,6 +146,38 @@ Los ángulos proporcionados para cada articulación se muestran en el video adju
 Para garantizar la precisión de los movimientos del robot en las tareas posteriores, se realizó un proceso de calibración y análisis de error para cada uno de los servomotores. El procedimiento consistió en enviar cinco posiciones angulares distintas (distribuidas dentro de su rango seguro de operación) y registrar tanto la posición solicitada (deseada) como la posición real reportada por el *encoder* interno de cada motor. Con estos datos se calculó el error absoluto para cada medición. A partir de esto, se determinó el error máximo, el error promedio y el desplazamiento de cero (offset) de cada articulación, implementando vía software la corrección necesaria para mitigar dicho desfase.
 
 [Código del ejercicio](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/cero.py)
+
+flowchart TD
+    A[Inicio] --> B[Inicializar ROS 2: rclpy.init]
+    B --> C[Instanciar nodo ControlRobot y suscriptores/publicadores]
+    C --> D[Mover robot a posición HOME inicial]
+    D --> E[Pausa 3s: rclpy.spin_once]
+
+    E --> F[Iterar por cada articulación: waist, shoulder, elbow, wrist, gripper]
+    F --> G[Generar 5 puntos de prueba entre el 90% de límites]
+
+    G --> H[Iterar por cada ángulo generado]
+    H --> I[Publicar movimiento a la articulación en evaluación]
+    I --> J[Pausa 3s: rclpy.spin_once para estabilizar]
+    J --> K[Leer posición medida desde /joint_states]
+    K --> L[Calcular error: eq = q_deseado - q_medido]
+    L --> M[Guardar datos de deseado, medido y error]
+
+    M --> N{¿Quedan ángulos de prueba?}
+    N -- Sí --> H
+    N -- No --> O[Mover robot a posición HOME]
+    O --> P[Pausa 3s: rclpy.spin_once]
+
+    P --> Q{¿Quedan articulaciones por calibrar?}
+    Q -- Sí --> F
+
+    Q -- No --> R[Calcular error promedio, máximo y despl. de cero]
+    R --> S[Calcular nuevos offsets sugeridos en radianes]
+    S --> T[/Imprimir nuevo bloque self.offset en consola/]
+    T --> U[Generar subplots con Matplotlib]
+    U --> V[Mostrar gráficas: plt.show]
+    V --> W[rclpy.shutdown]
+    W --> X[Fin]
 
 
 A continuación, se presentan las gráficas comparativas de posición para todas las articulaciones y los datos extraidos por consola:
@@ -150,6 +211,34 @@ Para esta etapa del laboratorio, se programó un nodo en ROS 2 Jazzy capaz de en
 
 [Código del ejercicio](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/simultaneo.py)
 
+flowchart TD
+    A[Inicio] --> B[Inicializar ROS 2: rclpy.init]
+    B --> C[Instanciar nodo Bailarin y convertidor de límites a rad]
+    C --> D[Esperar 1s]
+    D --> E[Definir rutina1_d y convertir poses a radianes]
+
+    E --> F[Configurar velocidad = 50]
+    F --> G[Mover a posición HOME]
+    G --> H[Esperar 8s]
+
+    H --> I[Configurar velocidad = 40]
+    I --> J[Iterar sobre cada pose de la rutina]
+
+    J --> K{¿Pose dentro de límites articulares?}
+    K -- No --> L[Registrar error y omitir movimiento] --> O
+    K -- Sí --> M[Publicar JointState en /pincher/command]
+    M --> N[Ejecutar rclpy.spin_once]
+    N --> O[Esperar 8s]
+
+    O --> P{¿Quedan poses en la rutina?}
+    P -- Sí --> J
+
+    P -- No --> Q[Mover a posición HOME]
+    Q --> R[Ejecutar rclpy.spin_once]
+    R --> S[Esperar 1s]
+    S --> T[rclpy.shutdown]
+    T --> U[Fin]
+
 Video del ejercicio:
 
 [![Ver el video](https://img.youtube.com/vi/H-eo34o0XAY/maxresdefault.jpg)](https://www.youtube.com/watch?v=H-eo34o0XAY)
@@ -159,6 +248,35 @@ Video del ejercicio:
 A diferencia de la actividad anterior, se desarrolló un script para alcanzar las configuraciones objetivo moviendo las articulaciones de manera estrictamente ordenada y enviando las nuevas configuraciones cuando se haya alcanzado el objetivo inmediatamente anterior. La configuración que se ejecutó en esta actividad fue [25, 25, 20, −20, 0].
 
 [Código del ejercicio](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/secuencial.py)
+
+flowchart TD
+    A[Inicio] --> B[Inicializar ROS 2: rclpy.init]
+    B --> C[Instanciar nodo Bailarin y suscribirse a /joint_states]
+    C --> D[Esperar 1s]
+    D --> E[Definir rutina1_d y convertir poses a radianes]
+
+    E --> F[Configurar velocidad = 40]
+    F --> G[Mover a posición HOME]
+    G --> H[Esperar 8s]
+
+    H --> I[Iterar sobre cada pose de la rutina]
+
+    I --> J{¿Pose dentro de límites?}
+    J -- No --> K[Registrar error y omitir pose] --> P
+    J -- Sí --> L[Publicar JointState en /pincher/command]
+
+    L --> M[Verificar llego_a_pose]
+    M --> N{¿Alcanzó objetivo?\n|qd - qm| <= 2°}
+    N -- No --> O[rclpy.spin_once\nActualizar q_medida vía callback] --> M
+
+    N -- Sí --> P{¿Quedan poses en la rutina?}
+    P -- Sí --> I
+
+    P -- No --> Q[Mover a posición HOME]
+    Q --> R[Ejecutar rclpy.spin_once]
+    R --> S[Esperar 1s]
+    S --> T[rclpy.shutdown]
+    T --> U[Fin]
 
 Video del ejercicio
 
@@ -175,6 +293,37 @@ Comparativamente, podemos mencionar que:
 En esta actividad se implementó un algoritmo de interpolación de trayectorias. Este método permite calcular puntos intermedios entre una configuración articular inicial y una configuración objetivo a lo largo de un tiempo determinado, generando perfiles de movimiento suaves para cada servomotor. Durante la ejecución de las pruebas físicas, se registraron los datos cinemáticos de las articulaciones para analizar su comportamiento en el tiempo.
 
 [Código del ejercicio](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/interpolacion.py)
+
+flowchart TD
+    A[Inicio] --> B[Inicializar ROS 2: rclpy.init]
+    B --> C[Instanciar nodo Interpolador y suscribirse a /joint_states]
+    C --> D[Configurar velocidad = 150]
+
+    D --> E[Mover a posición HOME]
+    E --> F[Esperar 5s]
+
+    F --> G["Calcular trayectoria lineal\n(s = t / T)"]
+    G --> H[Ejecutar y registrar trayectoria lineal\n(dt = 0.05s)]
+
+    H --> I[Iterar por cada pose de la trayectoria]
+    I --> J[Publicar pose en /pincher/command]
+    J --> K[rclpy.spin_once: leer q_medida]
+    K --> L[Guardar datos de q_deseada y q_medida en grados]
+    L --> M{¿Quedan poses?}
+    M -- Sí --> I
+
+    M -- No --> N[Regresar a HOME y esperar 5s]
+
+    N --> O["Calcular trayectoria cúbica\n(s = 3s² - 2s³)"]
+    O --> P[Ejecutar y registrar trayectoria cúbica\n(dt = 0.05s)]
+
+    P --> Q[Regresar a HOME y esperar 5s]
+
+    Q --> R[Calcular errores: e = q_deseada - q_medida]
+    R --> S[Generar gráficas de trayectorias y errores con Matplotlib]
+    S --> T[Mostrar gráficas: plt.show]
+    T --> U[rclpy.shutdown]
+    U --> V[Fin]
 
 A continuación, se presentan las gráficas resultantes que ilustran la evolución de las posiciones articulares durante el movimiento interpolado:
 
@@ -220,6 +369,34 @@ Al analizar las gráficas y el comportamiento físico del manipulador bajo los d
 Para evaluar la capacidad de respuesta dinámica del manipulador, se implementó una rutina donde la articulación del codo describe una trayectoria sinusoidal continua en el tiempo. El objetivo de esta prueba fue analizar cómo el cambio en la frecuencia y la amplitud de la señal (que se traduce en la rapidez del movimiento) afecta la capacidad del servomotor para seguir la ruta deseada con precisión.
 
 [Código del ejercicio](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/sinusoidal.py)
+
+flowchart TD
+    A[Inicio] --> B[Inicializar ROS 2: rclpy.init]
+    B --> C[Instanciar nodo Senoidal y suscribirse a /joint_states]
+    C --> D[Configurar velocidad = 200]
+    D --> E[Seleccionar articulación Elbow e índice 2, Duración = 10s]
+
+    E --> F[Iterar por cada prueba\n A=40°/70°, f=0.1Hz/0.3Hz]
+
+    F --> G{¿Amplitud excede límites?}
+    G -- Sí --> H[Mostrar error y cancelar prueba] --> P
+    G -- No --> I[Iniciar temporizador t = 0]
+
+    I --> J["Ecuación senoidal:\nq = A * sin(2*π*f*t)"]
+    J --> K[Publicar pose en /pincher/command]
+    K --> L[rclpy.spin_once: leer q_medida]
+    L --> M[Guardar t, q_deseada y q_medida]
+
+    M --> N{¿t > duración?}
+    N -- No --> J
+    N -- Sí --> O[Calcular Error Máximo y RMSE]
+    O --> Q[Imprimir métricas en consola]
+    Q --> R[Generar y mostrar gráfica: plt.show]
+    R --> P{¿Quedan pruebas por ejecutar?}
+
+    P -- Sí --> F
+    P -- No --> S[Destruir nodo y rclpy.shutdown]
+    S --> T[Fin]
 
 A continuación, se presentan las gráficas y los indicadores que contrastan la posición calculada (deseada) contra la posición medida (real) por el actuador del codo a diferentes frecuencias:
 
@@ -274,6 +451,27 @@ El programa que posteriormente se desarrolló está diseñado para recibir los c
 
 [Código del ejercicio](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/directa.py)
 
+flowchart TD
+    A[Inicio] --> B[Inicializar ROS 2: rclpy.init]
+    B --> C[Instanciar nodo ControlRobot]
+    C --> D[Definir eslabones l1..l4 y pose deseada q]
+    D --> E[Configurar velocidad = 50]
+
+    E --> F{¿Pose q dentro de límites?}
+    F -- No --> G[Mostrar 'MOVIMIENTO ABORTADO' y cancelar] --> N
+    F -- Sí --> H[Sumar offsets, convertir a rad y publicar JointState]
+    
+    H --> I[Ejecutar rclpy.spin_once]
+    I --> J[Convertir q1..q4 a radianes]
+    J --> K[Construir matrices DH: A1, A2, A3, A4, A5]
+    K --> L["Calcular matriz homogénea T05\n(T05 = A1 * A2 * A3 * A4 * A5)"]
+    L --> M[Extraer Posición x, y, z de T05]
+    M --> O[Calcular Orientación RPY: Roll, Pitch, Yaw]
+    O --> P[/Imprimir T05, Posición y Orientación en consola/]
+
+    P --> N[Esperar 2s, destruir nodo y rclpy.shutdown]
+    N --> Q[Fin]
+
 Para comprobar el funcionamiento del algoritmo, se adjuntan pantallazos en donde se evalúa la cinemática directa utilizando cinco configuraciones articulares (las cuales se muestran al principio de la consola), comparando los resultados calculados de posición y orientación del efector final con los observados gráficamente en la simulación de RViz.
 ![Directa 1](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/DIRE1.png)
 ![Directa 2](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/DIRE2.png)
@@ -305,6 +503,31 @@ Posteriormente, las ecuaciones obtenidas se implementaron en el código del ejer
 
 [Código del ejercicio](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/inversa.py)
 
+flowchart TD
+    A[Inicio] --> B[Inicializar ROS 2: rclpy.init]
+    B --> C[Instanciar nodo ControlRobot]
+    C --> D[/Solicitar Px, Py, Pz y Theta TCP al usuario/]
+
+    D --> E["Calcular q1 = atan2(Py, Px)\ny cos(q3)"]
+
+    E --> F{"¿|cos(q3)| <= 1?\n(Punto alcanzable)"}
+    F -- No --> G[Mostrar error: Fuera del espacio de trabajo] --> N
+    F -- Sí --> H["Calcular soluciones q2, q3 y q4\n(Codo Arriba y Codo Abajo)"]
+
+    H --> I[Validar límites articulares para ambas soluciones]
+    I --> J{¿Hay soluciones válidas?}
+
+    J -- No --> K[Mostrar error: Configuración fuera de límites] --> N
+    J -- Sí --> L[/Mostrar soluciones válidas y solicitar selección/]
+
+    L --> M{¿Selección válida?}
+    M -- Cancelar / Vacío --> N
+    M -- Sí --> O[Convertir q a grados]
+    O --> P[Publicar comando con robot.mover]
+    P --> Q[Esperar 0.5s] --> N
+
+    N[rclpy.shutdown] --> R[Fin]
+
 ![Procedimiento matemático 3](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/inv6.png)
 ![Procedimiento matemático 3](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/inversa2.png)
 ![Procedimiento matemático 3](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/inversa3.png)
@@ -318,6 +541,42 @@ Posteriormente, las ecuaciones obtenidas se implementaron en el código del ejer
 Para esta sección, se desarrolló un nodo que habilita un modo de "enseñanza" en el robot. Este programa permite mover el manipulador manualmente o por comandos hacia posiciones específicas, guardar la configuración articular actual, y asignarle un nombre identificador. En total se registraron y almacenaron ocho poses diferentes. Para garantizar la persistencia de los datos, estas posturas fueron guardadas en un archivo de configuración .yaml. Finalmente, la rutina de repetición lee este archivo y reproduce las poses en el orden registrado.
 
 [Código del ejercicio](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/ensenanza.py)
+
+flowchart TD
+    A[Inicio] --> B[Inicializar ROS 2: rclpy.init]
+    B --> C[Instanciar nodo Teacher / MODO ENSEÑANZA]
+    C --> D[Mostrar Menú Principal]
+
+    D --> E{Seleccionar Opción}
+
+    E -- "1: Mover robot" --> F1[Solicitar ángulos q1 a q5]
+    F1 --> F2{¿Ángulos dentro\nde límites?}
+    F2 -- No --> F3[Mostrar error y cancelar] --> D
+    F2 -- Sí --> F4[Publicar pose con mover_pose] --> D
+
+    E -- "2: Guardar pose" --> G1[rclpy.spin_once: leer position]
+    G1 --> G2[Solicitar nombre de la pose]
+    G2 --> G3[Guardar q_actual en grados dentro de poses.yaml] --> D
+
+    E -- "3: Listar poses" --> H1[Cargar poses desde poses.yaml]
+    H1 --> H2[Mostrar lista de poses en consola] --> D
+
+    E -- "4: Reproducir poses" --> I1[Configurar velocidad = 40]
+    I1 --> I2[Cargar secuencia desde poses.yaml]
+    I2 --> I3[Iterar por cada pose de la secuencia]
+    I3 --> I4[Enviar pose y esperar llegada error < 2°]
+    I4 --> I5[Esperar tiempo de transición]
+    I5 --> I6{¿Fin de lista o stop_requested?}
+    I6 -- Siguiente pose --> I3
+    I6 -- Terminado / Cancelado --> D
+
+    E -- "5: Cambiar tiempo" --> J1[Solicitar nuevo tiempo de transición]
+    J1 --> J2[Actualizar self.transition_time] --> D
+
+    E -- "6: Detener" --> K1[Activar stop_requested = True] --> D
+
+    E -- "0: Salir" --> L[Destruir nodo y rclpy.shutdown]
+    L --> M[Fin]
 
 Video del ejercicio:
 
@@ -340,6 +599,36 @@ El comportamiento presentado en la prueba física es el esperado en cuanto a la 
 Como cierre del laboratorio, se integraron los conceptos de control de movimiento, tiempos de transición e interpolación para programar una coreografía robótica automatizada al ritmo de la canción Chipi Chipi Chapa Chapa. El desarrollo de esta actividad cumple rigurosamente con los parámetros de sincronización, participación total, duración, autonomía y seguridad.
 
 [Código del ejercicio](https://github.com/labsir-un/Robotica-2026-I-Equipo-3A-Arevalo-Lopez/blob/main/Laboratorio%20No.%2005%20-%20Rob%C3%B3tica%20de%20Desarrollo%20ROS%20Jazzy%20y%20Phantom%20Pincher%20X100/files/baile.py)
+
+flowchart TD
+    A[Inicio] --> B[Inicializar ROS 2: rclpy.init]
+    B --> C["Instanciar nodo Bailarin\n(Convertir límites articulares a radianes)"]
+    C --> D["Convertir rutinas (1, 2, 3 y 4)\nde grados a radianes"]
+
+    D --> E["Mover a HOME inicial:\nVelocidad = 50 | Esperar 8s"]
+
+    E --> F1["RUTINA 2 (2 iteraciones):\nVelocidad = 150"]
+    F1 --> F2["Iterar poses -> mover(pose)\nspin_once(0.1s) -> sleep(0.282s)"]
+
+    F2 --> G1["RUTINA 3 (2 iteraciones):\nVelocidad = 350"]
+    G1 --> G2["Iterar poses -> mover(pose)\nspin_once(0.1s) -> sleep(0.68s)"]
+
+    G2 --> H1["RUTINA 4 (2 iteraciones):\nVelocidad = 300"]
+    H1 --> H2["Iterar poses -> mover(pose)\nspin_once(0.1s) -> sleep(0.68s)"]
+
+    H2 --> I1["RUTINA 1 (2 iteraciones):\nVelocidad = 300 / 200"]
+    I1 --> I2["Iterar poses -> mover(pose)\nspin_once(0.1s) -> sleep(0.28s)"]
+
+    I2 --> J["Regreso a HOME:\nVelocidad = 100 | Mover a HOME | Esperar 1s"]
+
+    J --> K[rclpy.shutdown]
+    K --> L[Fin]
+
+    subgraph Validación Interna: método mover
+        M1[Recibir pose articular] --> M2{¿Todas las articulaciones\ndentro de límites?}
+        M2 -- No --> M3[Mostrar error y cancelar movimiento]
+        M2 -- Sí --> M4[Publicar JointState en /pincher/command]
+    end
 
 ### Evidencia en Video
 
